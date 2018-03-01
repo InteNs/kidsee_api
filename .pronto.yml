@@ -1,0 +1,6 @@
+github:
+  slug: cedric5/kidsee_api
+  api_endpoint: https://api.github.com/
+  web_endpoint: https://github.com/
+
+format: "%{runner}: %{msg}"
