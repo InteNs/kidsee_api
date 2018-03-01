@@ -37,7 +37,7 @@ before_deploy:
   - cp .deliver/ssh_config ~/.ssh/config
   - chmod 600 deploy_rsa
   - ssh-add deploy_rsa
-  - ssh -o StrictHostKeyChecking=no $DEPLOY_USER@plonquo -p 212 exit
+  - ssh -o StrictHostKeyChecking=no $DEPLOY_USER@kidsee_api -p 212 exit
 
 deploy:
   - provider: script
