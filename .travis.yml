@@ -1,48 +1,31 @@
 language: elixir
-
 elixir:
-  - 1.6
-
+- 1.6
 addons:
   postgresql: '9.6'
-
 cache:
   directories:
   - "/home/travis/.rvm/"
-
 branches:
   only:
-    - master
-
+  - master
 env:
   global:
-    - MIX_ENV=test
-    - PRONTO_PULL_REQUEST_ID=$TRAVIS_PULL_REQUEST
-
+  - MIX_ENV=test
+  - PRONTO_PULL_REQUEST_ID=$TRAVIS_PULL_REQUEST
 services:
-  - postgresql
-
+- postgresql
 before_script:
-  - mix compile
-  - mix do ecto.create, ecto.migrate
-  - rvm install ruby-2.3.1
-  - gem install pronto-credo
-
+- mix compile
+- mix do ecto.create, ecto.migrate
+- rvm install ruby-2.3.1
+- gem install pronto-credo
 script:
-  - if [ "$PRONTO_PULL_REQUEST_ID" != "false" ]; then pronto run -f github_pr_review github_status; fi
-  - mix test
-
+- if [ "$PRONTO_PULL_REQUEST_ID" != "false" ]; then pronto run -f github_pr_review
+  github_status; fi
+- mix test
 before_deploy:
- # - openssl aes-256-cbc -K $encrypted_22e6bc1fda8b_key -iv $encrypted_22e6bc1fda8b_iv
- #   -in deploy_rsa.enc -out deploy_rsa -d
- # - cp .deliver/ssh_config ~/.ssh/config
- # - chmod 600 deploy_rsa
- # - ssh-add deploy_rsa
- # - ssh -o StrictHostKeyChecking=no $DEPLOY_USER@kidsee_api -p 212 exit
-
 deploy:
-  #- provider: script
-  #  skip_cleanup: true
-  #  script: "mix edeliver build upgrade production --with=$(ssh $DEPLOY_USER@$DEPLOY_HOST -p 212 ./kidsee_api/version)"
-  #  on:
-  #    branch: "master"
+before_install:
+- openssl aes-256-cbc -K $encrypted_0bb15c0bdb28_key -iv $encrypted_0bb15c0bdb28_iv
+  -in deploy-key.enc -out deploy-key -d
