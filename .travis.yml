@@ -20,12 +20,19 @@ before_script:
 - mix do ecto.create, ecto.migrate
 - rvm install ruby-2.3.1
 - gem install pronto-credo
+
 script:
-- if [ "$PRONTO_PULL_REQUEST_ID" != "false" ]; then pronto run -f github_pr_review
-  github_status; fi
+- if [ "$PRONTO_PULL_REQUEST_ID" != "false" ]; then pronto run -f github_pr_review github_status; fi
 - mix test
-before_deploy:
-deploy:
+- "mix edeliver build upgrade production --with=$(ssh $DEPLOY_USER@$DEPLOY_HOST -p 212 ./kidsee_api/version)"
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_0bb15c0bdb28_key -iv $encrypted_0bb15c0bdb28_iv
   -in deploy-key.enc -out deploy-key -d
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: "mix edeliver build upgrade production --with=$(ssh $DEPLOY_USER@$DEPLOY_HOST -p 212 ./kidsee_api/version)"
+    on:
+      branch: "master"
