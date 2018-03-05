@@ -3,6 +3,7 @@ defmodule KidseeApiWeb.UserController do
 
   alias KidseeApi.Accounts
   alias KidseeApi.Accounts.User
+  alias KidseeApi.Repo
 
   action_fallback KidseeApiWeb.FallbackController
 
@@ -40,12 +41,17 @@ defmodule KidseeApiWeb.UserController do
     end
   end
 
-  def sign_in(conn, %{"password" => "password"}) do
-    user = %{id: "1"}
-
-    conn
-    |> KidseeApi.Guardian.Plug.sign_in(user)
-    |> send_resp(204, "")
+  def sign_in(conn, %{"email" => email, "password" => password} = params) do
+  IO.inspect password
+  #text conn, "OK"
+    # Find the user in the database based on the credentials sent with the request
+    with %User{} = user <- Repo.get_by(User, email: email, password: password) do
+      # Attempt to authenticate the user
+      with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
+        # Render the token
+        render conn, "token.json", token: token
+      end
+    end
   end
 
   #def sign_in(conn, _params) do

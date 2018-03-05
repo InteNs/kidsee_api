@@ -17,6 +17,10 @@ defmodule KidseeApi.Accounts do
       [%User{}, ...]
 
   """
+  def authenticate(%{user: user, password: password}) do
+        KidseeApi.Guardian.encode_and_sign(user)
+  end
+
   def list_users do
     Repo.all(User)
   end
