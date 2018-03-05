@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :kidsee_api,
-  ecto_repos: [KidseeApi.Repo]
+  ecto_repos: [KidseeApi.Repo],
+  secret_key: "N8SXGO5HIcOV6rg1djSFCuPOh+QR/RM3KBpbEeHPF+wKQzmpTkBObM4B+5Smu1wr"
 
 # Configures the endpoint
 config :kidsee_api, KidseeApiWeb.Endpoint,
