@@ -33,7 +33,7 @@ defmodule KidseeApiWeb.UserControllerTest do
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
         "avatar" => "some avatar",
-        "birthdate" => ~D[2010-04-17],
+        "birthdate" => "2010-04-17",
         "city" => "some city",
         "email" => "some email",
         "password" => "some password",
@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.UserControllerTest do
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
         "avatar" => "some updated avatar",
-        "birthdate" => ~D[2011-05-18],
+        "birthdate" => "2011-05-18",
         "city" => "some updated city",
         "email" => "some updated email",
         "password" => "some updated password",
