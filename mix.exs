@@ -41,7 +41,11 @@ defmodule KidseeApi.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.5"},
-      {:edeliver, "~> 1.4"}
+      {:edeliver, "~> 1.4"},
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
+      {:pbkdf2_elixir, "~> 0.12"}
+
     ]
   end
 
