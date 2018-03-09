@@ -7,5 +7,6 @@ defmodule KidseeApiWeb.Router do
 
   scope "/api", KidseeApiWeb do
     pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
   end
 end
