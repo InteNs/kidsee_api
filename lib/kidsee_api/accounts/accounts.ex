@@ -21,6 +21,22 @@ defmodule KidseeApi.Accounts do
     Repo.all(User)
   end
 
+   @doc """
+  checks if the given password matches the given user
+  and returns the token if it matches.
+  """
+  def authenticate(%{user: user, password: password}) do
+    # Does password match the one stored in the database?
+    case Comeonin.Bcrypt.checkpw(password, user.password) do
+      true ->
+        # create and return the token
+        KidseeApiWeb.Guardian.encode_and_sign(user)
+      _ ->
+        # return an error
+        {:error, :unauthorized}
+    end
+  end
+
   @doc """
   Gets a single user.
 
@@ -36,6 +52,10 @@ defmodule KidseeApi.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def find_user(clauses) do
+    Repo.get_by(User, clauses)
+  end
 
   @doc """
   Creates a user.
