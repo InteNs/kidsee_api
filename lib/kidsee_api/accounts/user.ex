@@ -3,7 +3,6 @@ defmodule KidseeApi.Accounts.User do
   import Ecto.Changeset
   alias KidseeApi.Accounts.User
 
-
   schema "users" do
     field :avatar, :string
     field :birthdate, :date
@@ -20,6 +19,6 @@ defmodule KidseeApi.Accounts.User do
   def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :password, :email, :birthdate, :school, :city, :avatar])
-    |> validate_required([:username, :password, :email, :birthdate, :school, :city, :avatar])
+    |> validate_required([:username, :password, :email, :birthdate])
   end
 end

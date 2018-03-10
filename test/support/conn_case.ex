@@ -35,4 +35,10 @@ defmodule KidseeApiWeb.ConnCase do
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
+  setup %{conn: conn} do
+    user = KidseeApi.Factory.insert(:user)
+    {:ok, token, _claims} = KidseeApiWeb.Guardian.encode_and_sign(user)
+    conn = Plug.Conn.put_req_header(conn, "authorization", "Bearer #{token}")
+    {:ok, conn: conn }
+  end
 end
