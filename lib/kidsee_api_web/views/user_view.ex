@@ -1,27 +1,16 @@
 defmodule KidseeApiWeb.UserView do
   use KidseeApiWeb, :view
-  alias KidseeApiWeb.UserView
 
-  def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
-  end
+  attributes [
+    :username,
+    :email,
+    :birthdate,
+    :school,
+    :city,
+    :avatar
+  ]
 
-  def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
-  end
-
-  def render("token.json", %{token: token}) do
+  def render("token.json-api", %{token: token}) do
     %{token: token}
-  end
-
-  def render("user.json", %{user: user}) do
-    %{id: user.id,
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      birthdate: user.birthdate,
-      school: user.school,
-      city: user.city,
-      avatar: user.avatar}
   end
 end

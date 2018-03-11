@@ -8,7 +8,7 @@ defmodule KidseeApiWeb.UserController do
 
   def index(conn, _params) do
     users = Accounts.list_users()
-    render(conn, "index.json", users: users)
+    render(conn, "index.json-api", data: users)
   end
 
   def sign_in(conn, %{"email" => email, "password" => password}) do
@@ -17,30 +17,32 @@ defmodule KidseeApiWeb.UserController do
       # Attempt to authenticate the user
       with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
         # Render the token
-        render conn, "token.json", token: token
+        render conn, "token.json-api", token: token
       end
     end
   end
 
-  def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+  def create(conn, %{"data" => data}) do
+    attrs = JaSerializer.Params.to_attributes(data)
+    with {:ok, %User{} = user} <- Accounts.create_user(attrs) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("show.json-api", data: user)
     end
   end
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
+    render conn, "show.json-api", data: user
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(conn, %{"id" => id, "data" => data}) do
+    attrs = JaSerializer.Params.to_attributes(data)
     user = Accounts.get_user!(id)
 
-    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+    with {:ok, %User{} = user} <- Accounts.update_user(user, attrs) do
+      render conn, "show.json-api", data: user
     end
   end
 

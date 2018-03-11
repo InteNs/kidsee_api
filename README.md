@@ -8,17 +8,35 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## API endpoints
+
+In order to succsfully call endpoints you need the following:
+
+  * header with key: `content-type`,  value: `application/vnd.api+json`
+  * header with key: `authorization`, value: `Bearer <token>`
+
+### current endpoints:
+  note: most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
+
+  ```
+  POST    /users
+  POST    /users/sign-in
+  GET     /users
+  GET     /users/:id
+  PATCH   /users/:id
+  PUT     /users/:id
+  DELETE  /users/:id
+  ```
+
 ## Deployment
 
 ## Authentication
 
 In order to authenticate yourself with the server you should do the following:
 
-  * Have an user account with email and password
+  * Register a new user `POST /users` including a bcrypt hashed password
   * do a POST request to `/api/users/sign-in` with `email` and `password` params
-  * if the login was succesful the server returns a `token`
-  * all other requests except `POST /api/users/` (registration) needs an header with
-  key: `authorization`, value: `Bearer <token>`
+  * if the login was succesful the server returns your `token`
 
 ## Learn more
 
