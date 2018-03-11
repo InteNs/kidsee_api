@@ -4,6 +4,10 @@ BUILD_HOST="174.138.7.193"
 BUILD_USER="deploy"
 BUILD_AT="/home/deploy/app_build"
 
+
+RELEASE_STORE="deploy@174.138.7.193/home/deploy/release_store
+AUTO_VERSION="build-date+git-revision"
+
 PRODUCTION_HOSTS="174.138.7.193"
 PRODUCTION_USER="deploy"
 DELIVER_TO="/home/deploy/app_release"
