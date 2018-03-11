@@ -20,7 +20,7 @@ defmodule KidseeApi.Mixfile do
   def application do
     [
       mod: {KidseeApi.Application, []},
-      extra_applications: [:ex_machina, :logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
