@@ -9,11 +9,18 @@ use Mix.Config
 config :kidsee_api,
   ecto_repos: [KidseeApi.Repo]
 
+config :phoenix, :format_encoders,
+  "json-api": Poison
+
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json-api"]
+}
+
 # Configures the endpoint
 config :kidsee_api, KidseeApiWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "CUykr1kJq51xNXBsu1h6aoseOeoNT5i/Tet0zKvFs8u5x5E+loWqYXKCc3LVeRHh",
-  render_errors: [view: KidseeApiWeb.ErrorView, accepts: ~w(json)],
+  render_errors: [view: KidseeApiWeb.ErrorView, accepts: ~w(json-api)],
   pubsub: [name: KidseeApi.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

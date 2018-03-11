@@ -26,6 +26,7 @@ defmodule KidseeApi.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
+  defp elixirc_paths(:dev), do: ["lib", "test/support", "test/factories"]
   defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
@@ -33,9 +34,9 @@ defmodule KidseeApi.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:credo, "~> 0.8",      only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.1", only: [:dev, :test]},
-      {:faker, "~> 0.9", only: :test},
+      {:faker, "~> 0.9",      only: [:dev, :test]},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
@@ -46,8 +47,8 @@ defmodule KidseeApi.Mixfile do
       {:edeliver, "~> 1.4"},
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"}
-
+      {:bcrypt_elixir, "~> 1.0"},
+      {:ja_serializer, "~> 0.12"}
     ]
   end
 

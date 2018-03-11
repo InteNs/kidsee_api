@@ -26,7 +26,6 @@ defmodule KidseeApiWeb.ConnCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(KidseeApi.Repo)
     unless tags[:async] do
@@ -36,9 +35,13 @@ defmodule KidseeApiWeb.ConnCase do
   end
 
   setup %{conn: conn} do
-    user = KidseeApi.Factory.insert(:user)
+    # prepare authentication and content-type
+    user = KidseeApi.UserFactory.insert(:user)
     {:ok, token, _claims} = KidseeApiWeb.Guardian.encode_and_sign(user)
-    conn = Plug.Conn.put_req_header(conn, "authorization", "Bearer #{token}")
+
+    conn = conn
+           |> Plug.Conn.put_req_header("content-type", "application/vnd.api+json")
+           |> Plug.Conn.put_req_header("authorization", "Bearer #{token}")
     {:ok, conn: conn }
   end
 end

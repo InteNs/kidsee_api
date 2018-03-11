@@ -1,5 +1,7 @@
 defmodule KidseeApi.Factory do
-  use ExMachina.Ecto, repo: KidseeApi.Repo
-
-  use KidseeApi.UserFactory
+  defmacro __using__(_) do
+    quote do
+      import KidseeApi.UserFactory
+    end
+  end
 end
