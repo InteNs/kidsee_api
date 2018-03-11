@@ -19,13 +19,13 @@ In order to succsfully call endpoints you need the following:
   note: most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
 
   ```
-  POST    /users
-  POST    /users/sign-in
-  GET     /users
-  GET     /users/:id
-  PATCH   /users/:id
-  PUT     /users/:id
-  DELETE  /users/:id
+  POST    /api/users
+  POST    /api/users/sign-in
+  GET     /api/users
+  GET     /api/users/:id
+  PATCH   /api/users/:id
+  PUT     /api/users/:id
+  DELETE  /api/users/:id
   ```
 
 ## Deployment
