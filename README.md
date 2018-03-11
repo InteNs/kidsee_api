@@ -16,7 +16,9 @@ In order to succsfully call endpoints you need the following:
   * header with key: `authorization`, value: `Bearer <token>`
 
 ### current endpoints:
-  note: most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
+
+  * most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
+  * current hostname for the server is: `174.138.7.193`
 
   ```
   POST    /api/users
