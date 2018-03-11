@@ -20,12 +20,12 @@ defmodule KidseeApi.Mixfile do
   def application do
     [
       mod: {KidseeApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:ex_machina, :logger, :runtime_tools]
     ]
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
   defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
@@ -34,6 +34,8 @@ defmodule KidseeApi.Mixfile do
   defp deps do
     [
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.1", only: [:dev, :test]},
+      {:faker, "~> 0.9", only: :test},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
@@ -41,7 +43,11 @@ defmodule KidseeApi.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.5"},
-      {:edeliver, "~> 1.4"}
+      {:edeliver, "~> 1.4"},
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"}
+
     ]
   end
 

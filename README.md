@@ -8,7 +8,17 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+## Deployment
+
+## Authentication
+
+In order to authenticate yourself with the server you should do the following:
+
+  * Have an user account with email and password
+  * do a POST request to `/api/users/sign-in` with `email` and `password` params
+  * if the login was succesful the server returns a `token`
+  * all other requests except `POST /api/users/` (registration) needs an header with
+  key: `authorization`, value: `Bearer <token>`
 
 ## Learn more
 
