@@ -11,14 +11,14 @@ defmodule KidseeApiWeb.Router do
     plug KidseeApiWeb.Guardian.AuthPipeline
   end
 
-  scope "/", KidseeApiWeb do
+  scope "/api", KidseeApiWeb do
     pipe_through :api
 
     resources "/users", UserController, only: [:create]
     post "/users/sign-in", UserController, :sign_in
   end
 
-  scope "/", KidseeApiWeb do
+  scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
 
     resources "/users", UserController, only: [:index, :update, :show, :delete]
