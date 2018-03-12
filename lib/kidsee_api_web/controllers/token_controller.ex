@@ -5,6 +5,7 @@ defmodule KidseeApiWeb.TokenController do
 
   alias KidseeApi.Accounts
   alias KidseeApi.Accounts.User
+  alias Ecto.Changeset
 
   def create(conn, %{"email" => email, "password" => password}) do
     render_token(conn, email, password)
@@ -17,8 +18,8 @@ defmodule KidseeApiWeb.TokenController do
   def create(_conn, params) do
     fields = %{username: :string, email: :string, password: :string}
     changeset = {%{}, fields}
-    |> Ecto.Changeset.cast(params, Map.keys(fields))
-    |> Ecto.Changeset.validate_required(Map.keys(fields))
+    |> Changeset.cast(params, Map.keys(fields))
+    |> Changeset.validate_required(Map.keys(fields))
     {:error, changeset}
   end
 
