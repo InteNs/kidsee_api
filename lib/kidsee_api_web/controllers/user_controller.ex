@@ -3,6 +3,7 @@ defmodule KidseeApiWeb.UserController do
 
   alias KidseeApi.Accounts
   alias KidseeApi.Accounts.User
+  alias JaSerializer.Params
 
   action_fallback KidseeApiWeb.FallbackController
 
@@ -12,7 +13,7 @@ defmodule KidseeApiWeb.UserController do
   end
 
   def create(conn, %{"data" => data}) do
-    attrs = JaSerializer.Params.to_attributes(data)
+    attrs = Params.to_attributes(data)
     with {:ok, %User{} = user} <- Accounts.create_user(attrs) do
       conn
       |> put_status(:created)
@@ -27,7 +28,7 @@ defmodule KidseeApiWeb.UserController do
   end
 
   def update(conn, %{"id" => id, "data" => data}) do
-    attrs = JaSerializer.Params.to_attributes(data)
+    attrs = Params.to_attributes(data)
     user = Accounts.get_user!(id)
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, attrs) do
