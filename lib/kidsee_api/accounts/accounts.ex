@@ -57,6 +57,13 @@ defmodule KidseeApi.Accounts do
     Repo.get_by(User, clauses)
   end
 
+  def find_user_by_identification!(string) do
+    Repo.one!(from u in User,
+      where: u.email == ^string,
+      or_where: u.username == ^string
+    )
+  end
+
   @doc """
   Creates a user.
 

@@ -22,7 +22,7 @@ In order to succsfully call endpoints you need the following:
 
   ```
   POST    /api/users
-  POST    /api/users/sign-in
+  POST    /api/tokens
   GET     /api/users
   GET     /api/users/:id
   PATCH   /api/users/:id
@@ -37,7 +37,7 @@ In order to succsfully call endpoints you need the following:
 In order to authenticate yourself with the server you should do the following:
 
   * Register a new user `POST /users` including a bcrypt hashed password
-  * do a POST request to `/api/users/sign-in` with `email` and `password` params
+  * do a POST request to `/api/tokens` with `email` or `username` and `password` params
   * if the login was succesful the server returns your `token`
 
 ## Learn more
