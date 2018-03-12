@@ -15,7 +15,7 @@ defmodule KidseeApiWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, only: [:create]
-    post "/users/sign-in", UserController, :sign_in
+    post "/tokens", TokenController, :create
   end
 
   scope "/api", KidseeApiWeb do
