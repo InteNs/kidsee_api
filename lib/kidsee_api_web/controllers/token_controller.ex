@@ -26,7 +26,7 @@ defmodule KidseeApiWeb.TokenController do
   defp render_token(conn, identification, password) do
     with %User{} = user <- Accounts.find_user_by_identification!(identification) do
       with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
-        render conn, "token.json-api", token: token
+        render conn, "token.json-api", token: token, user: user
       end
     end
   end

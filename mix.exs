@@ -4,7 +4,7 @@ defmodule KidseeApi.Mixfile do
   def project do
     [
       app: :kidsee_api,
-      version: "0.2.0",
+      version: "0.2.1",
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -37,6 +37,7 @@ defmodule KidseeApi.Mixfile do
       {:credo, "~> 0.8",      only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.1", only: [:dev, :test]},
       {:faker, "~> 0.9",      only: [:dev, :test]},
+      {:cors_plug, "~> 1.5"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
