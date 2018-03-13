@@ -18,8 +18,9 @@ defmodule KidseeApiWeb.TokenControllerTest do
       login = %{username: user.username, password: "test123"}
       conn = post conn, token_path(conn, :create), login
 
-      assert %{"token" => token} = json_response(conn, 200)["meta"]
+      assert %{"id" => id, "token" => token} = json_response(conn, 200)["meta"]
       assert {:ok, _claims} = KidseeApiWeb.Guardian.decode_and_verify(token)
+      assert id == user.id
     end
 
     test "renders not found if the login was not valid", %{conn: conn} do
