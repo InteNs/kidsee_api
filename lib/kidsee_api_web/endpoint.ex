@@ -36,7 +36,7 @@ defmodule KidseeApiWeb.Endpoint do
     key: "_kidsee_api_key",
     signing_salt: "3lP6iUpc"
 
-  plug CORSPlug, origin: ["http://174.138.7.193"]
+  plug CORSPlug
   plug KidseeApiWeb.Router
 
   @doc """
