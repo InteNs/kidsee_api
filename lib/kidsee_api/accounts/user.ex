@@ -20,5 +20,7 @@ defmodule KidseeApi.Accounts.User do
     user
     |> cast(attrs, [:username, :password, :email, :birthdate, :school, :city, :avatar])
     |> validate_required([:username, :password, :email, :birthdate])
+    |> unique_constraint(:email)
+    |> unique_constraint(:username)
   end
 end
