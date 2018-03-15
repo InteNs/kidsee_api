@@ -42,6 +42,12 @@ In order to authenticate yourself with the server you should do the following:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+
+## Troubleshooting
+ ```
+ tail -f ~/app_release/kidsee_api/var/log/erlang.log.4
+  ```
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/
