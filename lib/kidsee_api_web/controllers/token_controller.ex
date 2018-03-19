@@ -7,12 +7,12 @@ defmodule KidseeApiWeb.TokenController do
   alias KidseeApi.Accounts.User
   alias Ecto.Changeset
 
-  def create(conn, %{"email" => email, "password" => password}) do
-    render_token(conn, email, password)
-  end
-
-  def create(conn, %{"username" => username, "password" => password}) do
-    render_token(conn, username, password)
+  def create(conn, %{"identification" => identification, "password" => password}) do
+    with %User{} = user <- Accounts.find_user_by_identification!(identification) do
+      with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
+        render conn, "token.json-api", token: token, user: user
+      end
+    end
   end
 
   def create(_conn, params) do
@@ -21,13 +21,5 @@ defmodule KidseeApiWeb.TokenController do
     |> Changeset.cast(params, Map.keys(fields))
     |> Changeset.validate_required(Map.keys(fields))
     {:error, changeset}
-  end
-
-  defp render_token(conn, identification, password) do
-    with %User{} = user <- Accounts.find_user_by_identification!(identification) do
-      with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
-        render conn, "token.json-api", token: token, user: user
-      end
-    end
   end
 end
