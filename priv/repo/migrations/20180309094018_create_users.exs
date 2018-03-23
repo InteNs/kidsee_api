@@ -2,7 +2,7 @@ defmodule KidseeApi.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
-    create table(:users) do
+    create table(:user) do
       add :username, :string
       add :password, :string
       add :email, :string
@@ -13,6 +13,5 @@ defmodule KidseeApi.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
-
   end
 end
