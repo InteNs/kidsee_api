@@ -3,7 +3,7 @@ defmodule KidseeApi.Accounts.User do
   import Ecto.Changeset
   alias KidseeApi.Accounts.User
 
-  schema "users" do
+  schema "user" do
     field :avatar, :string
     field :birthdate, :date
     field :city, :string
