@@ -3,6 +3,7 @@ defmodule KidseeApi.Timeline.Post.ContentType do
   import Ecto.Changeset
   alias KidseeApi.Timeline.Post.Post
 
+  @derive {Poison.Encoder, only: [:name, :description]}
   schema "content_type" do
     field :name, :string
     field :description, :string
