@@ -5,6 +5,7 @@ defmodule KidseeApi.Timeline.Post.Post do
   alias KidseeApi.Timeline.Post.Post
   alias KidseeApi.Timeline.Post.PostStatus
   alias KidseeApi.Timeline.Post.ContentType
+  alias KidseeApi.Timeline.Post.Comment
 
   schema "post" do
     field :content, :string
@@ -13,7 +14,7 @@ defmodule KidseeApi.Timeline.Post.Post do
     belongs_to :status, PostStatus
     field :title, :string
     belongs_to :user, User
-
+    has_many :comments, Comment
     timestamps()
   end
 

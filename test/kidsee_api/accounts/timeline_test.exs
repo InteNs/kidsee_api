@@ -1,4 +1,4 @@
-defmodule KidseeApi.TimelineTest do
+defmodule KidseeApi.Account.TimelineTest do
 #  use KidseeApi.DataCase
 #
 #  alias KidseeApi.Timeline

@@ -21,6 +21,7 @@ defmodule KidseeApiWeb.Router do
   scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
     resources "/posts", PostController
+    resources "/comments", CommentController
     resources "/users", UserController, only: [:options, :index, :update, :show, :delete]
   end
 end

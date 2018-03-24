@@ -16,7 +16,7 @@ defmodule KidseeApiWeb.PostController do
   def create(conn, %{"data" => post_params}) do
     post_params = Params.to_attributes(post_params)
     with {:ok, %Post{} = post} <- Timeline.create_post(post_params) do
-      post = Repo.preload(post,[:content_type, :user, :status])
+      post = Repo.preload(post,[:content_type, :user, :status, :comments])
       conn
       |> put_status(:created)
       |> put_resp_header("location", post_path(conn, :show, post))
