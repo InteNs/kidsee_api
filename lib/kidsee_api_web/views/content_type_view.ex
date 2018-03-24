@@ -5,4 +5,5 @@ defmodule KidseeApiWeb.ContentTypeView do
     :name,
     :description
   ]
+
 end

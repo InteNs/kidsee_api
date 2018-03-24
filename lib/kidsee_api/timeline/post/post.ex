@@ -20,7 +20,7 @@ defmodule KidseeApi.Timeline.Post.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:content, :title, :content_type, :user, :status, :location])
-    |> validate_required([:content, :title, :content_type, :user, :status, :location])
+    |> cast(attrs, [:content, :title, :content_type_id, :user_id, :status_id, :location])
+    |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :location])
   end
 end
