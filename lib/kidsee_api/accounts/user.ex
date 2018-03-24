@@ -3,6 +3,7 @@ defmodule KidseeApi.Accounts.User do
   import Ecto.Changeset
   alias KidseeApi.Accounts.User
 
+  @derive {Poison.Encoder, only: [:avatar, :birthdate, :city, :school, :username]}
   schema "user" do
     field :avatar, :string
     field :birthdate, :date
