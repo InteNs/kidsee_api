@@ -1,6 +1,5 @@
 defmodule KidseeApiWeb.PostView do
   use KidseeApiWeb, :view
-  alias KidseeApiWeb.PostView
 
   has_one :user, serializer: KidseeApiWeb.UserView, include: true
   has_one :content_type, serializer: KidseeApiWeb.ContentTypeView, include: true
