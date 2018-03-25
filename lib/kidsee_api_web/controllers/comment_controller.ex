@@ -4,6 +4,7 @@ defmodule KidseeApiWeb.CommentController do
   alias KidseeApi.Timeline
   alias KidseeApi.Timeline.Post.Comment
   alias JaSerializer.Params
+  alias KidseeApi.Repo
 
   action_fallback KidseeApiWeb.FallbackController
 
@@ -15,6 +16,7 @@ defmodule KidseeApiWeb.CommentController do
   def create(conn, %{"data" => comment_params}) do
     comment_params = Params.to_attributes(comment_params)
     with {:ok, %Comment{} = comment} <- Timeline.create_comment(comment_params) do
+      comment = Repo.preload(comment, [:content_type, :user])
       conn
       |> put_status(:created)
       |> put_resp_header("location", comment_path(conn, :show, comment))
