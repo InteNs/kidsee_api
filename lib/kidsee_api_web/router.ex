@@ -14,14 +14,14 @@ defmodule KidseeApiWeb.Router do
   scope "/api", KidseeApiWeb do
     pipe_through :api
 
-    resources "/users", UserController, only: [:options, :create]
+    resources "/users", UsersController, only: [:options, :create]
     post "/tokens", TokenController, :create
   end
 
   scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
-    resources "/posts", PostController
-    resources "/comments", CommentController
-    resources "/users", UserController, only: [:options, :index, :update, :show, :delete]
+    resources "/posts", PostsController
+    resources "/comments", CommentsController
+    resources "/users", UsersController, only: [:options, :index, :update, :show, :delete]
   end
 end

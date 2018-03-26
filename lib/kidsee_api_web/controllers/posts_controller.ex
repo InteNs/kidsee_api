@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.PostController do
+defmodule KidseeApiWeb.PostsController do
   use KidseeApiWeb, :controller
 
   alias KidseeApi.Timeline
@@ -19,7 +19,7 @@ defmodule KidseeApiWeb.PostController do
       post = Repo.preload(post,[:content_type, :user, :status, comments: [:content_type, :user]])
       conn
       |> put_status(:created)
-      |> put_resp_header("location", post_path(conn, :show, post))
+      |> put_resp_header("location", posts_path(conn, :show, post))
       |> render("show.json-api", post: post)
     end
   end

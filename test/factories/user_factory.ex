@@ -3,7 +3,7 @@ defmodule KidseeApi.UserFactory do
 
   alias KidseeApi.Accounts.User
 
-  use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.UserView
+  use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.UsersView
 
   def user_factory do
     %User{
