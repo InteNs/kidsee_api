@@ -1,9 +1,7 @@
 defmodule KidseeApi.Accounts.User do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use KidseeApi.Schema
   alias KidseeApi.Accounts.User
 
-  @derive {Poison.Encoder, only: [:avatar, :birthdate, :city, :school, :username]}
   schema "user" do
     field :avatar, :string
     field :birthdate, :date
@@ -14,6 +12,10 @@ defmodule KidseeApi.Accounts.User do
     field :username, :string
 
     timestamps()
+  end
+
+  def preload(query) do
+    query
   end
 
   @doc false

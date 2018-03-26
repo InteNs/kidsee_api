@@ -1,14 +1,14 @@
 defmodule KidseeApiWeb.PostView do
   use KidseeApiWeb, :view
 
-  has_one :user, serializer: KidseeApiWeb.UserView, include: true
-  has_one :content_type, serializer: KidseeApiWeb.ContentTypeView, include: true
-  has_one :status, serializer: KidseeApiWeb.StatusTypeView, include: true
-  has_many :comments, serializer: KidseeApiWeb.CommentView, include: true
+  has_one :user, serializer: KidseeApiWeb.UserView
+  has_one :content_type, serializer: KidseeApiWeb.ContentTypeView
+  has_one :status, serializer: KidseeApiWeb.PostStatusView
+  has_many :comments, serializer: KidseeApiWeb.CommentView
 
   attributes [
-    :title,
     :content,
-    :location
+    :post_location,
+    :title
   ]
 end

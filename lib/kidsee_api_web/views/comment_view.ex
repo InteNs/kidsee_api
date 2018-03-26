@@ -1,9 +1,9 @@
 defmodule KidseeApiWeb.CommentView do
   use KidseeApiWeb, :view
-  alias KidseeApiWeb.CommentView
 
-  has_one :user, serializer: KidseeApiWeb.UserView, include: true
-  has_one :content_type, serializer: KidseeApiWeb.ContentTypeView, include: :true
+  has_one :post, serializer: KidseeApiWeb.PostView
+  has_one :user, serializer: KidseeApiWeb.UserView
+  has_one :content_type, serializer: KidseeApiWeb.ContentTypeView
 
   attributes [
     :content

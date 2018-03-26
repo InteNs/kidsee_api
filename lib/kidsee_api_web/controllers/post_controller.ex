@@ -9,39 +9,50 @@ defmodule KidseeApiWeb.PostController do
   action_fallback KidseeApiWeb.FallbackController
 
   def index(conn, _params) do
-    posts = Timeline.list_posts()
-    render(conn, "index.json-api", posts: posts)
+    posts = Post
+            |> Repo.preload_schema
+            |> Repo.all
+    render(conn, "index.json-api", data: posts, opts: [include: post_includes()])
   end
 
   def create(conn, %{"data" => post_params}) do
     post_params = Params.to_attributes(post_params)
-    with {:ok, %Post{} = post} <- Timeline.create_post(post_params) do
-      post = Repo.preload(post,[:content_type, :user, :status, comments: [:content_type, :user]])
+    with {:ok, %Post{id: id}} <- Timeline.create_post(post_params) do
+      post = Post
+             |> Repo.preload_schema
+             |> Repo.get(id)
       conn
       |> put_status(:created)
       |> put_resp_header("location", post_path(conn, :show, post))
-      |> render("show.json-api", post: post)
+      |> render("show.json-api", data: post, opts: [include: post_includes()])
     end
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.preload(Timeline.get_post!(id), [:content_type, :user, comments: [:content_type, :user]])
-    render(conn, "show.json-api", post: post)
+    post = Post
+           |> Repo.preload_schema
+           |> Repo.get(id)
+    render(conn, "show.json-api", data: post, opts: [include: post_includes()])
   end
 
   def update(conn, %{"id" => id, "data" => post_params}) do
     post_params = Params.to_attributes(post_params)
-    post = Timeline.get_post!(id)
+    post = Post
+           |> Repo.preload_schema
+           |> Repo.get(id)
 
     with {:ok, %Post{} = post} <- Timeline.update_post(post, post_params) do
-      render(conn, "show.json-api", post: post)
+      render(conn, "show.json-api", data: post)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    post = Timeline.get_post!(id)
+    post = Post
+           |> Repo.get(id)
     with {:ok, %Post{}} <- Timeline.delete_post(post) do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def post_includes, do: "content_type,user,status,comments"
 end

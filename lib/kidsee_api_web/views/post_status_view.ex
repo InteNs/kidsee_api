@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.StatusTypeView do
+defmodule KidseeApiWeb.PostStatusView do
   use KidseeApiWeb, :view
 
   attributes [
