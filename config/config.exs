@@ -12,6 +12,9 @@ config :kidsee_api,
 config :phoenix, :format_encoders,
   "json-api": Poison
 
+config :ja_serializer,
+  pluralize_types: true
+
 config :mime, :types, %{
   "application/vnd.api+json" => ["json-api"]
 }
