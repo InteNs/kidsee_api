@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.UserView do
+defmodule KidseeApiWeb.UsersView do
   use KidseeApiWeb, :view
 
   attributes [

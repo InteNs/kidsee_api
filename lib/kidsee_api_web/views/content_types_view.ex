@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.ContentTypeView do
+defmodule KidseeApiWeb.ContentTypesView do
   use KidseeApiWeb, :view
 
   attributes [

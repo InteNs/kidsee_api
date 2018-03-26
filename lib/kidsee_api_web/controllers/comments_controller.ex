@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.CommentController do
+defmodule KidseeApiWeb.CommentsController do
   use KidseeApiWeb, :controller
 
   alias KidseeApi.Timeline
@@ -19,13 +19,13 @@ defmodule KidseeApiWeb.CommentController do
       comment = Repo.preload(comment, [:content_type, :user])
       conn
       |> put_status(:created)
-      |> put_resp_header("location", comment_path(conn, :show, comment))
+      |> put_resp_header("location", comments_path(conn, :show, comment))
       |> render("show.json", comment: comment)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    comment = Timeline.get_comment!(id) |> IO.inspect
+    comment = Timeline.get_comment!(id)
     render(conn, "show.json", comment: comment)
   end
 
