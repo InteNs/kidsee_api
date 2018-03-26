@@ -18,7 +18,7 @@ defmodule KidseeApi.Timeline do
 
   """
   def list_posts do
-    Repo.all(Post) |> Repo.preload([:content_type, :user, comments: [:content_type, :user]])
+    Repo.all(Post) |> Repo.preload([:content_type, :user, :status, comments: [:content_type, :user]])
   end
 
   @doc """
