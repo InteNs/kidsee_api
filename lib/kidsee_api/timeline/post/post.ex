@@ -23,7 +23,7 @@ defmodule KidseeApi.Timeline.Post.Post do
     from q in query,
       preload: [
         :status, :content_type, :user,
-        comments: ^Repo.preload_schema(Comment)
+        comments: ^Repo.preload_schema(Comment, :nested)
       ]
   end
 
