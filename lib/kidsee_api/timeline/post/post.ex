@@ -8,7 +8,7 @@ defmodule KidseeApi.Timeline.Post.Post do
 
   schema "post" do
     field :content, :string
-    field :post_location, :string, source: :location
+    field :location, :string
     field :title, :string
 
     belongs_to :status, PostStatus
