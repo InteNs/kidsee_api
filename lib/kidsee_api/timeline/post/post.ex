@@ -1,6 +1,5 @@
 defmodule KidseeApi.Timeline.Post.Post do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use KidseeApi.Schema
   alias KidseeApi.Accounts.User
   alias KidseeApi.Timeline.Post.Post
   alias KidseeApi.Timeline.Post.PostStatus
@@ -9,13 +8,23 @@ defmodule KidseeApi.Timeline.Post.Post do
 
   schema "post" do
     field :content, :string
-    belongs_to :content_type, ContentType
-    field :location, :string
-    belongs_to :status, PostStatus
+    field :post_location, :string, source: :location
     field :title, :string
+
+    belongs_to :status, PostStatus
+    belongs_to :content_type, ContentType
     belongs_to :user, User
+
     has_many :comments, Comment
     timestamps()
+  end
+
+  def preload(query) do
+    from q in query,
+      preload: [
+        :status, :content_type, :user,
+        comments: ^Repo.preload_schema(Comment)
+      ]
   end
 
   @doc false

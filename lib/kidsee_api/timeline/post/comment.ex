@@ -1,6 +1,5 @@
 defmodule KidseeApi.Timeline.Post.Comment do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use KidseeApi.Schema
   alias KidseeApi.Timeline.Post.Comment
   alias KidseeApi.Timeline.Post.Post
   alias KidseeApi.Timeline.Post.ContentType
@@ -12,6 +11,16 @@ defmodule KidseeApi.Timeline.Post.Comment do
     belongs_to :user, User
     belongs_to :content_type, ContentType
     timestamps()
+  end
+
+  def preload(query) do
+    from q in query,
+      preload: [:post, :user, :content_type]
+  end
+
+  def preload(query, :nested) do
+    from q in query,
+      preload: [:user, :content_type]
   end
 
   @doc false

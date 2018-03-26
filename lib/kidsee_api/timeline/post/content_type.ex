@@ -1,15 +1,15 @@
 defmodule KidseeApi.Timeline.Post.ContentType do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use KidseeApi.Schema
   alias KidseeApi.Timeline.Post.Post
 
-  @derive {Poison.Encoder, only: [:name, :description]}
   schema "content_type" do
     field :name, :string
     field :description, :string
 
     timestamps()
   end
+
+  def preload(query), do: query
 
   @doc false
   def changeset(%Post{} = post, attrs) do

@@ -8,4 +8,11 @@ defmodule KidseeApi.Repo do
   def init(_, opts) do
     {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
   end
+
+  def preload_schema(schema, type \\ nil) do
+    case type do
+      nil -> apply(schema, :preload, [schema])
+      _   -> apply(schema, :preload, [schema, type])
+    end
+  end
 end
