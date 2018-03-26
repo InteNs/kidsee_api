@@ -23,7 +23,7 @@ defmodule KidseeApi.Timeline.Post.Comment do
 
   def preload(query, :nested) do
     from q in query,
-      preload: [:user, :content_type]
+      preload: [:user, :content_type, :post]
   end
 
   @doc false
