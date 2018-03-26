@@ -6,9 +6,7 @@ defmodule KidseeApiWeb.PostView do
   has_one :status, serializer: KidseeApiWeb.PostStatusView
   has_many :comments, serializer: KidseeApiWeb.CommentView
 
-  attributes [
-    :content,
-    :post_location,
-    :title
-  ]
+  # location attribute is a reserved keyword in ja_serializer,
+  # this is a workaround
+  def attributes(post, _), do: Map.take(post, [:title, :location, :content])
 end
