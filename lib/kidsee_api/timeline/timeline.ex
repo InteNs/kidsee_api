@@ -294,20 +294,20 @@ defmodule KidseeApi.Timeline do
     ContentType.changeset(content_type, %{})
   end
 
-  alias KidseeApi.Timeline.Post.PostStatus
+  alias KidseeApi.Timeline.Post.Status
   @doc """
-  Gets a single post_status.
+  Gets a single status.
 
-  Raises `Ecto.NoResultsError` if the PostStatus does not exist.
+  Raises `Ecto.NoResultsError` if the Status does not exist.
 
   ## Examples
 
-      iex> get_post_status!(123)
+      iex> get_status!(123)
       %Comment{}
 
-      iex> get_post_status!(456)
+      iex> get_status!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_post_status!(id), do: Repo.get!(PostStatus, id)
+  def get_status!(id), do: Repo.get!(Status, id)
 end

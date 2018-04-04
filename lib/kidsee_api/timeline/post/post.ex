@@ -2,7 +2,7 @@ defmodule KidseeApi.Timeline.Post.Post do
   use KidseeApi.Schema
   alias KidseeApi.Accounts.User
   alias KidseeApi.Timeline.Post.Post
-  alias KidseeApi.Timeline.Post.PostStatus
+  alias KidseeApi.Timeline.Post.Status
   alias KidseeApi.Timeline.Post.ContentType
   alias KidseeApi.Timeline.Post.Comment
 
@@ -11,7 +11,7 @@ defmodule KidseeApi.Timeline.Post.Post do
     field :location, :string
     field :title, :string
 
-    belongs_to :status, PostStatus
+    belongs_to :status, Status
     belongs_to :content_type, ContentType
     belongs_to :user, User
 
