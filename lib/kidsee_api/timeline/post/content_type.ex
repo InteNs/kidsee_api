@@ -1,6 +1,6 @@
 defmodule KidseeApi.Timeline.Post.ContentType do
   use KidseeApi.Schema
-  alias KidseeApi.Timeline.Post.Post
+  alias KidseeApi.Timeline.Post.ContentType
 
   schema "content_type" do
     field :name, :string
@@ -12,7 +12,7 @@ defmodule KidseeApi.Timeline.Post.ContentType do
   def preload(query), do: query
 
   @doc false
-  def changeset(%Post{} = post, attrs) do
+  def changeset(%ContentType{} = post, attrs) do
     post
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
