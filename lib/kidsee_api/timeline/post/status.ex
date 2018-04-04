@@ -1,7 +1,7 @@
-defmodule KidseeApi.Timeline.Post.PostStatus do
+defmodule KidseeApi.Timeline.Post.Status do
   use Ecto.Schema
   import Ecto.Changeset
-  alias KidseeApi.Timeline.Post.PostStatus
+  alias KidseeApi.Timeline.Post.Status
 
   schema "post_status" do
     field :name, :string
@@ -12,7 +12,7 @@ defmodule KidseeApi.Timeline.Post.PostStatus do
   def preload(query), do: query
 
   @doc false
-  def changeset(%PostStatus{} = post, attrs) do
+  def changeset(%Status{} = post, attrs) do
     post
     |> cast(attrs, [:name])
     |> validate_required([:name])

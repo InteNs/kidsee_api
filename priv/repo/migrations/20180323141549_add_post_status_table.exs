@@ -1,8 +1,8 @@
-defmodule KidseeApi.Repo.Migrations.AddPostStatusTable do
+defmodule KidseeApi.Repo.Migrations.AddStatusTable do
   use Ecto.Migration
 
   def change do
-    create table(:post_status) do
+    create table(:status) do
       add :name, :string
       timestamps()
     end

@@ -7,7 +7,7 @@ defmodule KidseeApi.Repo.Migrations.AddPostTable do
       add :title, :string
       add :content_type_id, references("content_type")
       add :user_id, references("user")
-      add :status_id, references("post_status")
+      add :status_id, references("status")
       add :location, :string
       timestamps()
     end

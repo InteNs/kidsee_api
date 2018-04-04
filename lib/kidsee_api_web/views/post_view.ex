@@ -3,7 +3,7 @@ defmodule KidseeApiWeb.PostView do
 
   has_one :user, serializer: KidseeApiWeb.UserView
   has_one :content_type, serializer: KidseeApiWeb.ContentTypeView
-  has_one :status, serializer: KidseeApiWeb.PostStatusView
+  has_one :status, serializer: KidseeApiWeb.StatusView
   has_many :comments, serializer: KidseeApiWeb.CommentView
 
   # location attribute is a reserved keyword in ja_serializer,
