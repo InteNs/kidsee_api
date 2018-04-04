@@ -197,4 +197,117 @@ defmodule KidseeApi.Timeline do
   def change_comment(%Comment{} = comment) do
     Comment.changeset(comment, %{})
   end
+
+  alias KidseeApi.Timeline.Post.ContentType
+
+  @doc """
+  Returns the list of content_types.
+
+  ## Examples
+
+      iex> list_content_types()
+      [%ContentType{}, ...]
+
+  """
+  def list_content_types do
+    Repo.all(ContentType)
+  end
+
+  @doc """
+  Gets a single content_type.
+
+  Raises `Ecto.NoResultsError` if the Content type does not exist.
+
+  ## Examples
+
+      iex> get_content_type!(123)
+      %ContentType{}
+
+      iex> get_content_type!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_content_type!(id), do: Repo.get!(ContentType, id)
+
+  @doc """
+  Creates a content_type.
+
+  ## Examples
+
+      iex> create_content_type(%{field: value})
+      {:ok, %ContentType{}}
+
+      iex> create_content_type(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_content_type(attrs \\ %{}) do
+    %ContentType{}
+    |> ContentType.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a content_type.
+
+  ## Examples
+
+      iex> update_content_type(content_type, %{field: new_value})
+      {:ok, %ContentType{}}
+
+      iex> update_content_type(content_type, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_content_type(%ContentType{} = content_type, attrs) do
+    content_type
+    |> ContentType.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a ContentType.
+
+  ## Examples
+
+      iex> delete_content_type(content_type)
+      {:ok, %ContentType{}}
+
+      iex> delete_content_type(content_type)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_content_type(%ContentType{} = content_type) do
+    Repo.delete(content_type)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking content_type changes.
+
+  ## Examples
+
+      iex> change_content_type(content_type)
+      %Ecto.Changeset{source: %ContentType{}}
+
+  """
+  def change_content_type(%ContentType{} = content_type) do
+    ContentType.changeset(content_type, %{})
+  end
+
+  alias KidseeApi.Timeline.Post.PostStatus
+  @doc """
+  Gets a single post_status.
+
+  Raises `Ecto.NoResultsError` if the PostStatus does not exist.
+
+  ## Examples
+
+      iex> get_post_status!(123)
+      %Comment{}
+
+      iex> get_post_status!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_status!(id), do: Repo.get!(PostStatus, id)
 end
