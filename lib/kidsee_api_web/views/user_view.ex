@@ -6,7 +6,7 @@ defmodule KidseeApiWeb.UserView do
     :email,
     :birthdate,
     :school,
-    :city,
+    :postal_code,
     :avatar
   ]
 end

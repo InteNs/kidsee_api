@@ -5,7 +5,7 @@ defmodule KidseeApi.Accounts.User do
   schema "user" do
     field :avatar, :string
     field :birthdate, :date
-    field :city, :string
+    field :postal_code, :string
     field :email, :string
     field :password, :string
     field :school, :string
@@ -21,7 +21,7 @@ defmodule KidseeApi.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :email, :birthdate, :school, :city, :avatar])
+    |> cast(attrs, [:username, :password, :email, :birthdate, :school, :postal_code, :avatar])
     |> validate_required([:username, :password, :email, :birthdate])
     |> unique_constraint(:email)
     |> unique_constraint(:username)

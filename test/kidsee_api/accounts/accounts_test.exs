@@ -6,9 +6,9 @@ defmodule KidseeApi.AccountsTest do
   describe "users" do
     alias KidseeApi.Accounts.User
 
-    @valid_attrs %{avatar: "some avatar", birthdate: ~D[2010-04-17], city: "some city", email: "some email", password: "some password", school: "some school", username: "some username"}
-    @update_attrs %{avatar: "some updated avatar", birthdate: ~D[2011-05-18], city: "some updated city", email: "some updated email", password: "some updated password", school: "some updated school", username: "some updated username"}
-    @invalid_attrs %{avatar: nil, birthdate: nil, city: nil, email: nil, password: nil, school: nil, username: nil}
+    @valid_attrs %{avatar: "some avatar", birthdate: ~D[2010-04-17], postal_code: "some post code", email: "some email", password: "some password", school: "some school", username: "some username"}
+    @update_attrs %{avatar: "some updated avatar", birthdate: ~D[2011-05-18], postal_code: "some updated post code", email: "some updated email", password: "some updated password", school: "some updated school", username: "some updated username"}
+    @invalid_attrs %{avatar: nil, birthdate: nil, postal_code: nil, email: nil, password: nil, school: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -33,7 +33,7 @@ defmodule KidseeApi.AccountsTest do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert user.avatar == "some avatar"
       assert user.birthdate == ~D[2010-04-17]
-      assert user.city == "some city"
+      assert user.postal_code == "some post code"
       assert user.email == "some email"
       assert user.password == "some password"
       assert user.school == "some school"
@@ -50,7 +50,7 @@ defmodule KidseeApi.AccountsTest do
       assert %User{} = user
       assert user.avatar == "some updated avatar"
       assert user.birthdate == ~D[2011-05-18]
-      assert user.city == "some updated city"
+      assert user.postal_code == "some updated post code"
       assert user.email == "some updated email"
       assert user.password == "some updated password"
       assert user.school == "some updated school"

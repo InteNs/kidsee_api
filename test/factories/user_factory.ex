@@ -12,7 +12,7 @@ defmodule KidseeApi.UserFactory do
       password:  Comeonin.Bcrypt.hashpwsalt("test123"),
       birthdate: Faker.Date.date_of_birth(),
       avatar:    "-",
-      city:      Faker.Address.city(),
+      postal_code: Faker.Address.postcode(),
       school:    "Avans"
     }
   end
