@@ -4,12 +4,14 @@ defmodule KidseeApiWeb.UserController do
   alias KidseeApi.Accounts
   alias KidseeApi.Accounts.User
   alias JaSerializer.Params
+  alias KidseeApi.Repo
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.json-api", data: users)
+  def index(conn, params) do
+    users = User
+            |> Repo.paginate(params)
+    render(conn, "index.json-api", data: users.entries)
   end
 
   def create(conn, %{"data" => data}) do

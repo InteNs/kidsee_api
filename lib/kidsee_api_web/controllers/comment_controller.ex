@@ -8,11 +8,11 @@ defmodule KidseeApiWeb.CommentController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, _params) do
+  def index(conn, params) do
     comments = Comment
                |> Repo.preload_schema
-               |> Repo.all
-    render(conn, "index.json-api", data: comments, opts: [include: comment_includes()])
+               |> Repo.paginate(params)
+    render(conn, "index.json-api", data: comments.entries, opts: [include: comment_includes()])
   end
 
   def create(conn, %{"data" => comment_params}) do

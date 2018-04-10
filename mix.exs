@@ -49,7 +49,9 @@ defmodule KidseeApi.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:ja_serializer, "~> 0.13"}
+      {:ja_serializer, "~> 0.13"},
+      {:scrivener, "~> 2.0"},
+      {:scrivener_ecto, "~> 1.0"}
     ]
   end
 
