@@ -8,11 +8,11 @@ defmodule KidseeApiWeb.PostController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, _params) do
+  def index(conn, params) do
     posts = Post
             |> Repo.preload_schema
-            |> Repo.all
-    render(conn, "index.json-api", data: posts, opts: [include: post_includes()])
+            |> Repo.paginate(params)
+    render(conn, "index.json-api", data: posts.entries, opts: [include: post_includes()])
   end
 
   def create(conn, %{"data" => post_params}) do
