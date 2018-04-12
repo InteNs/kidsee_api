@@ -1,9 +1,10 @@
 defmodule KidseeApiWeb.ContentTypeController do
   use KidseeApiWeb, :controller
 
-  alias KidseeApi.Timeline
-  alias KidseeApi.Timeline.ContentType
+  alias KidseeApi.Context
+  alias KidseeApi.Schema.ContentType
   alias KidseeApi.Repo
+
   action_fallback KidseeApiWeb.FallbackController
 
   def index(conn, _params) do
@@ -22,7 +23,7 @@ defmodule KidseeApiWeb.ContentTypeController do
   end
 
   def show(conn, %{"id" => id}) do
-    content_type = Timeline.get_content_type!(id)
+    content_type = Context.get!(ContentType, id)
     render(conn, "index.json-api", data: content_type)
   end
 

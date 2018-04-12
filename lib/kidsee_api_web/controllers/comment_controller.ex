@@ -1,8 +1,8 @@
 defmodule KidseeApiWeb.CommentController do
   use KidseeApiWeb, :controller
 
-  alias KidseeApi.Timeline
-  alias KidseeApi.Timeline.Post.Comment
+  alias KidseeApi.Context
+  alias KidseeApi.Schemas.Comment
   alias JaSerializer.Params
   alias KidseeApi.Repo
 
@@ -17,7 +17,7 @@ defmodule KidseeApiWeb.CommentController do
 
   def create(conn, %{"data" => comment_params}) do
     comment_params = Params.to_attributes(comment_params)
-    with {:ok, %Comment{id: id}} <- Timeline.create_comment(comment_params) do
+    with {:ok, %Comment{id: id}} <- Context.create(Comment, comment_params) do
       comment = Comment
                 |> Repo.preload_schema
                 |> Repo.get(id)
@@ -41,7 +41,7 @@ defmodule KidseeApiWeb.CommentController do
               |> Repo.preload_schema
               |> Repo.get(id)
 
-    with {:ok, %Comment{} = comment} <- Timeline.update_comment(comment, comment_params) do
+    with {:ok, %Comment{} = comment} <- Context.update(comment, comment_params) do
       render(conn, "show.json-api", data: comment, opts: [include: comment_includes()])
     end
   end
@@ -49,7 +49,7 @@ defmodule KidseeApiWeb.CommentController do
   def delete(conn, %{"id" => id}) do
     comment = Comment
               |> Repo.get(id)
-    with {:ok, %Comment{}} <- Timeline.delete_comment(comment) do
+    with {:ok, %Comment{}} <- Context.delete(comment) do
       send_resp(conn, :no_content, "")
     end
   end

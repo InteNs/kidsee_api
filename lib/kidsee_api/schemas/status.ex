@@ -1,7 +1,6 @@
-defmodule KidseeApi.Timeline.Post.Status do
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias KidseeApi.Timeline.Post.Status
+defmodule KidseeApi.Schemas.Status do
+  use KidseeApi.Schema
+  alias KidseeApi.Schemas.Status
 
   schema "post_status" do
     field :name, :string

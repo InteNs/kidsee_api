@@ -1,9 +1,6 @@
-defmodule KidseeApi.Timeline.Post.Comment do
+defmodule KidseeApi.Schemas.Comment do
   use KidseeApi.Schema
-  alias KidseeApi.Timeline.Post.Comment
-  alias KidseeApi.Timeline.Post.Post
-  alias KidseeApi.Timeline.Post.ContentType
-  alias KidseeApi.Accounts.User
+  alias KidseeApi.Schemas.{Comment, Post, ContentType, User}
 
   schema "comment" do
     field :content, :string

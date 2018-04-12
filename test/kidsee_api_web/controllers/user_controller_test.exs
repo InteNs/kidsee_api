@@ -1,6 +1,6 @@
 defmodule KidseeApiWeb.UserControllerTest do
   use KidseeApiWeb.ConnCase do
-    use KidseeApi.Factory
+    import KidseeApi.UserFactory
   end
 
   describe "index" do
@@ -20,7 +20,7 @@ defmodule KidseeApiWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, user_path(conn, :create), json_api_params_for(:user)
+      conn = post conn, user_path(conn, :create), json_api_params_for(:invalid_user)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

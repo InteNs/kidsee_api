@@ -1,7 +1,8 @@
 defmodule KidseeApiWeb.Guardian do
   use Guardian, otp_app: :kidsee_api
 
-  alias KidseeApi.Accounts
+  alias KidseeApi.Context
+  alias KidseeApi.Schemas.User
 
   def subject_for_token(resource, _claims) do
     {:ok, to_string(resource.id)}
@@ -9,6 +10,6 @@ defmodule KidseeApiWeb.Guardian do
 
   def resource_from_claims(claims) do
     id = claims["sub"]
-    {:ok, Accounts.get_user!(id)}
+    {:ok, Context.get!(User, id)}
   end
 end
