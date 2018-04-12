@@ -10,7 +10,7 @@ defmodule KidseeApi.UserFactory do
       email:     sequence(:email, &"email-#{&1}@example.com"),
       username:  sequence(:username, &"test_user_#{&1}"),
       password:  Comeonin.Bcrypt.hashpwsalt("test123"),
-      birthdate: Faker.Date.date_of_birth(),
+      birthdate: Faker.DateTime.backward(2000),
       avatar:    "-",
       postal_code: Faker.Address.postcode(),
       school:    "Avans"
@@ -19,7 +19,7 @@ defmodule KidseeApi.UserFactory do
 
   def invalid_user_factory do
     %User{build(:user) |
-      email: nil
+      email: nil, username: nil
     }
   end
 

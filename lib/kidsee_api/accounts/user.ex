@@ -4,7 +4,7 @@ defmodule KidseeApi.Accounts.User do
 
   schema "user" do
     field :avatar, :string
-    field :birthdate, :date
+    field :birthdate, :naive_datetime
     field :postal_code, :string
     field :email, :string
     field :password, :string
