@@ -3,7 +3,9 @@ defmodule KidseeApiWeb.StatusController do
 
   alias KidseeApi.Context
   alias KidseeApi.Schemas.Status
+  alias JaSerializer.Params
   alias KidseeApi.Repo
+
   action_fallback KidseeApiWeb.FallbackController
 
   def index(conn, _params) do
@@ -12,13 +14,14 @@ defmodule KidseeApiWeb.StatusController do
     render(conn, "index.json-api", data: statuses)
   end
 
-  def create(conn, %{"status" => status_params}) do
-    #with {:ok, %ContentType{} = status} <- Timeline.create_status(status_params) do
-    #  conn
-    #  |> put_status(:created)
-    #  |> put_resp_header("location", status_path(conn, :show, status))
-    #  |> render("show.json-api", status: status)
-    #end
+  def create(conn, %{"data" => data}) do
+    attrs = Params.to_attributes(data)
+    with {:ok, %Status{} = status} <- Context.create(Status, attrs) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", status_path(conn, :show, status))
+      |> render("show.json-api", data: status)
+    end
   end
 
   def show(conn, %{"id" => id}) do
@@ -26,18 +29,19 @@ defmodule KidseeApiWeb.StatusController do
     render(conn, "index.json-api", data: status)
   end
 
-  def update(conn, %{"id" => id, "status" => status_params}) do
-   # status = Timeline.get_status!(id)
-#
-   # with {:ok, %ContentType{} = status} <- Timeline.update_status(status, status_params) do
-   #   render(conn, "show.json-api", status: status)
-   # end
+  def update(conn, %{"id" => id, "data" => data}) do
+    attrs = Params.to_attributes(data)
+    status = Context.get!(Status, id)
+
+    with {:ok, %Status{} = status} <- Context.update(status, attrs) do
+      render conn, "show.json-api", data: status
+    end
   end
 
   def delete(conn, %{"id" => id}) do
-    #status = Timeline.get_status!(id)
-    #with {:ok, %ContentType{}} <- Timeline.delete_status(status) do
-    #  send_resp(conn, :no_content, "")
-    #end
+    status = Context.get!(Status, id)
+    with {:ok, %Status{}} <- Context.delete(status) do
+      send_resp(conn, :no_content, "")
+    end
   end
 end
