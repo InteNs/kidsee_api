@@ -15,5 +15,5 @@ config :kidsee_api, KidseeApi.Repo,
   username: "postgres",
   password: "postgres",
   database: "kidsee_api_test",
-  hostname: "174.138.7.193",
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

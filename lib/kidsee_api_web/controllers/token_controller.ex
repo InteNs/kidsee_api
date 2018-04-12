@@ -3,13 +3,13 @@ defmodule KidseeApiWeb.TokenController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  alias KidseeApi.Accounts
-  alias KidseeApi.Accounts.User
+  alias KidseeApi.Schemas.User
+  alias KidseeApi.Context.Authentication
   alias Ecto.Changeset
 
   def create(conn, %{"identification" => identification, "password" => password}) do
-    with %User{} = user <- Accounts.find_user_by_identification!(identification) do
-      with {:ok, token, _claims} <- Accounts.authenticate(%{user: user, password: password}) do
+    with %User{} = user <- Authentication.get_user_by_identification!(identification) do
+      with {:ok, token, _claims} <- Authentication.authenticate(%{user: user, password: password}) do
         render conn, "token.json-api", token: token, user: user
       end
     end

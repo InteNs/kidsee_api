@@ -1,6 +1,6 @@
-defmodule KidseeApi.Accounts.User do
+defmodule KidseeApi.Schemas.User do
   use KidseeApi.Schema
-  alias KidseeApi.Accounts.User
+  alias KidseeApi.Schemas.User
 
   schema "user" do
     field :avatar, :string

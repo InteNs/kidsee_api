@@ -1,8 +1,8 @@
 defmodule KidseeApiWeb.PostController do
   use KidseeApiWeb, :controller
 
-  alias KidseeApi.Timeline
-  alias KidseeApi.Timeline.Post.Post
+  alias KidseeApi.Context
+  alias KidseeApi.Schemas.Post
   alias JaSerializer.Params
   alias KidseeApi.Repo
 
@@ -17,7 +17,7 @@ defmodule KidseeApiWeb.PostController do
 
   def create(conn, %{"data" => post_params}) do
     post_params = Params.to_attributes(post_params)
-    with {:ok, %Post{id: id}} <- Timeline.create_post(post_params) do
+    with {:ok, %Post{id: id}} <- Context.create(Post, post_params) do
       post = Post
              |> Repo.preload_schema
              |> Repo.get(id)
@@ -41,7 +41,7 @@ defmodule KidseeApiWeb.PostController do
            |> Repo.preload_schema
            |> Repo.get(id)
 
-    with {:ok, %Post{} = post} <- Timeline.update_post(post, post_params) do
+    with {:ok, %Post{} = post} <- Context.update(post, post_params) do
       render(conn, "show.json-api", data: post)
     end
   end
@@ -49,7 +49,7 @@ defmodule KidseeApiWeb.PostController do
   def delete(conn, %{"id" => id}) do
     post = Post
            |> Repo.get(id)
-    with {:ok, %Post{}} <- Timeline.delete_post(post) do
+    with {:ok, %Post{}} <- Context.delete(post) do
       send_resp(conn, :no_content, "")
     end
   end

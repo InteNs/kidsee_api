@@ -1,8 +1,8 @@
 defmodule KidseeApiWeb.StatusController do
   use KidseeApiWeb, :controller
 
-  alias KidseeApi.Timeline
-  alias KidseeApi.Timeline.Post.Status
+  alias KidseeApi.Context
+  alias KidseeApi.Schemas.Status
   alias KidseeApi.Repo
   action_fallback KidseeApiWeb.FallbackController
 
@@ -22,7 +22,7 @@ defmodule KidseeApiWeb.StatusController do
   end
 
   def show(conn, %{"id" => id}) do
-    status = Timeline.get_status!(id)
+    status = Context.get!(Status, id)
     render(conn, "index.json-api", data: status)
   end
 

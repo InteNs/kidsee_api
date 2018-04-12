@@ -1,6 +1,6 @@
-defmodule KidseeApi.Timeline.Post.ContentType do
+defmodule KidseeApi.Schemas.ContentType do
   use KidseeApi.Schema
-  alias KidseeApi.Timeline.Post.ContentType
+  alias KidseeApi.Schemas.ContentType
 
   schema "content_type" do
     field :name, :string

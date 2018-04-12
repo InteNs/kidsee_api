@@ -1,6 +1,6 @@
 defmodule KidseeApiWeb.TokenControllerTest do
   use KidseeApiWeb.ConnCase do
-    use KidseeApi.Factory
+    import KidseeApi.UserFactory
   end
 
   describe "create" do

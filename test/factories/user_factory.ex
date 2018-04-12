@@ -1,7 +1,7 @@
 defmodule KidseeApi.UserFactory do
   use ExMachina.Ecto, repo: KidseeApi.Repo
 
-  alias KidseeApi.Accounts.User
+  alias KidseeApi.Schemas.User
 
   use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.UserView
 
