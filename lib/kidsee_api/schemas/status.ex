@@ -2,7 +2,7 @@ defmodule KidseeApi.Schemas.Status do
   use KidseeApi.Schema
   alias KidseeApi.Schemas.Status
 
-  schema "post_status" do
+  schema "status" do
     field :name, :string
 
     timestamps()
