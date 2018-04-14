@@ -55,4 +55,47 @@ defmodule KidseeApiWeb.CommentController do
   end
 
   def comment_includes, do: "content_type,user,post"
+
+  def swagger_definitions do
+    Map.merge(Comment.swagger_definitions, SwaggerCommon.definitions)
+  end
+
+  swagger_path :index do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    paging
+    response 200, "OK", JsonApi.page(:comment)
+    response 404, "not_found"
+  end
+
+  swagger_path :show do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    response 200, "OK", JsonApi.single(:comment)
+    response 404, "not found"
+  end
+
+  swagger_path :create do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:comment)
+
+    response 201, "created", JsonApi.single(:comment)
+  end
+
+  swagger_path :update do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:comment)
+
+    response 200, "OK", JsonApi.single(:comment)
+  end
+
+  swagger_path :delete do
+    SwaggerCommon.auth
+    response 204, "no content"
+    response 404, "not found"
+  end
 end

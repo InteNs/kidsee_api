@@ -29,4 +29,19 @@ defmodule KidseeApi.Schemas.Comment do
     |> cast(attrs, [:content, :post_id, :user_id, :content_type_id])
     |> validate_required([:content, :post_id, :user_id, :content_type_id])
   end
+
+  def swagger_definitions do
+    use PhoenixSwagger
+    %{
+      comment: JsonApi.resource do
+        description "A comment"
+        attributes do
+          content :string, "the content of the comment", required: true
+        end
+        relationship :post
+        relationship :user
+        relationship :content_type
+      end
+    }
+  end
 end

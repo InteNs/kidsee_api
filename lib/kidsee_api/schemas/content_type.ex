@@ -17,4 +17,17 @@ defmodule KidseeApi.Schemas.ContentType do
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
   end
+
+  def swagger_definitions do
+    use PhoenixSwagger
+    %{
+      content_type: JsonApi.resource do
+        description "A status"
+        attributes do
+          name :string, "the status name", required: true
+          description :string, "the status description", required: true
+        end
+      end
+    }
+  end
 end

@@ -55,4 +55,50 @@ defmodule KidseeApiWeb.PostController do
   end
 
   def post_includes, do: "content_type,user,status,comments"
+
+  def swagger_definitions do
+    Map.merge(
+      Post.swagger_definitions,
+      SwaggerCommon.definitions
+    )
+  end
+
+  swagger_path :index do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    paging
+    response 200, "OK", JsonApi.page(:post)
+    response 404, "not_found"
+  end
+
+  swagger_path :show do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    response 200, "OK", JsonApi.single(:post)
+    response 404, "not found"
+  end
+
+  swagger_path :create do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:post)
+
+    response 201, "created", JsonApi.single(:post)
+  end
+
+  swagger_path :update do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:post)
+
+    response 200, "OK", JsonApi.single(:post)
+  end
+
+  swagger_path :delete do
+    SwaggerCommon.auth
+    response 204, "no content"
+    response 404, "not found"
+  end
 end

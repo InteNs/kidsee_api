@@ -9,18 +9,10 @@ In order to succsfully call endpoints you need the following:
 
 ### current endpoints:
 
+  * visit our documentation at `http://174.138.7.193/api/swagger`
   * most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
   * current hostname for the server is: `174.138.7.193`
 
-  ```
-  POST    /api/users
-  POST    /api/tokens
-  GET     /api/users
-  GET     /api/users/:id
-  PATCH   /api/users/:id
-  PUT     /api/users/:id
-  DELETE  /api/users/:id
-  ```
 
 ## Deployment
   * on master run `mix edeliver upgrade production`
