@@ -5,7 +5,7 @@ defmodule KidseeApi.Repo.Migrations.AddLocationTable do
     create table(:location) do
       add :name, :string
       add :description, :string
-      add :adress, :string
+      add :address, :string
       add :lat, :float
       add :lon, :float
     end
