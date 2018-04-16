@@ -4,7 +4,7 @@ defmodule KidseeApiWeb.LocationView do
   attributes [
     :name,
     :description,
-    :adress,
+    :address,
     :lon,
     :lat
   ]

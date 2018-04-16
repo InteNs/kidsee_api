@@ -9,7 +9,7 @@ defmodule KidseeApi.LocationFactory do
       %Location{
         name:         "Example name",
         description:  "Example desciption",
-        adress:       "Example adress",
+        address:       "Example address",
         lat:          12.121342,
         lon:          32.345434
       }
