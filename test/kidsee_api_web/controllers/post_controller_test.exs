@@ -47,9 +47,9 @@ defmodule KidseeApiWeb.PostControllerTest do
       conn_delete = delete conn, post_path(conn, :delete, post)
       assert response(conn_delete, 204)
 
-      #assert_error_sent 404, fn ->
-      #  get conn, post_path(conn, :show, post)
-      #end
+      assert_error_sent 404, fn ->
+        get conn, post_path(conn, :show, post)
+      end
     end
   end
 end

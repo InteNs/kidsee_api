@@ -20,7 +20,7 @@ defmodule KidseeApiWeb.CommentController do
     with {:ok, %Comment{id: id}} <- Context.create(Comment, comment_params) do
       comment = Comment
                 |> Repo.preload_schema
-                |> Repo.get(id)
+                |> Repo.get!(id)
       conn
       |> put_status(:created)
       |> put_resp_header("location", comment_path(conn, :show, comment))
@@ -31,7 +31,7 @@ defmodule KidseeApiWeb.CommentController do
   def show(conn, %{"id" => id}) do
     comment = Comment
               |> Repo.preload_schema
-              |> Repo.get(id)
+              |> Repo.get!(id)
     render(conn, "show.json-api", data: comment, opts: [include: comment_includes()])
   end
 
@@ -39,7 +39,7 @@ defmodule KidseeApiWeb.CommentController do
     comment_params = Params.to_attributes(comment_params)
     comment = Comment
               |> Repo.preload_schema
-              |> Repo.get(id)
+              |> Repo.get!(id)
 
     with {:ok, %Comment{} = comment} <- Context.update(comment, comment_params) do
       render(conn, "show.json-api", data: comment, opts: [include: comment_includes()])
@@ -48,7 +48,7 @@ defmodule KidseeApiWeb.CommentController do
 
   def delete(conn, %{"id" => id}) do
     comment = Comment
-              |> Repo.get(id)
+              |> Repo.get!(id)
     with {:ok, %Comment{}} <- Context.delete(comment) do
       send_resp(conn, :no_content, "")
     end

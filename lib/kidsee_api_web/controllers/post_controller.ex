@@ -20,7 +20,7 @@ defmodule KidseeApiWeb.PostController do
     with {:ok, %Post{id: id}} <- Context.create(Post, post_params) do
       post = Post
              |> Repo.preload_schema
-             |> Repo.get(id)
+             |> Repo.get!(id)
       conn
       |> put_status(:created)
       |> put_resp_header("location", post_path(conn, :show, post))
@@ -31,7 +31,7 @@ defmodule KidseeApiWeb.PostController do
   def show(conn, %{"id" => id}) do
     post = Post
            |> Repo.preload_schema
-           |> Repo.get(id)
+           |> Repo.get!(id)
     render(conn, "show.json-api", data: post, opts: [include: post_includes()])
   end
 
@@ -39,7 +39,7 @@ defmodule KidseeApiWeb.PostController do
     post_params = Params.to_attributes(post_params)
     post = Post
            |> Repo.preload_schema
-           |> Repo.get(id)
+           |> Repo.get!(id)
 
     with {:ok, %Post{} = post} <- Context.update(post, post_params) do
       render(conn, "show.json-api", data: post)
@@ -48,7 +48,7 @@ defmodule KidseeApiWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     post = Post
-           |> Repo.get(id)
+           |> Repo.get!(id)
     with {:ok, %Post{}} <- Context.delete(post) do
       send_resp(conn, :no_content, "")
     end

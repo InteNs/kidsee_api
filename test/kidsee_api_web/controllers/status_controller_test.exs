@@ -47,9 +47,9 @@ end
       conn_delete = delete conn, status_path(conn, :delete, status)
       assert response(conn_delete, 204)
 
-      #assert_error_sent 404, fn ->
-      #  get conn, status_path(conn, :show, status)
-      #end
+      assert_error_sent 404, fn ->
+        get conn, status_path(conn, :show, status)
+      end
     end
   end
 end
