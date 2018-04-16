@@ -18,6 +18,10 @@ defmodule KidseeApiWeb.Router do
     post "/tokens", TokenController, :create
   end
 
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :kidsee_api, swagger_file: "swagger.json"
+  end
+
   scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
     resources "/locations", LocationController, only: [:index, :create, :update, :show, :delete]
@@ -26,5 +30,15 @@ defmodule KidseeApiWeb.Router do
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]
     resources "/users", UserController, only: [:index, :update, :show, :delete]
+  end
+
+  def swagger_info do
+  %{
+    info: %{
+      version: "1.0",
+      title: "Kidsee Api",
+      host: "174.138.7.193"
+    }
+  }
   end
 end

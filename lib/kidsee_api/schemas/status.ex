@@ -16,4 +16,16 @@ defmodule KidseeApi.Schemas.Status do
     |> cast(attrs, [:name])
     |> validate_required([:name])
   end
+
+  def swagger_definitions do
+    use PhoenixSwagger
+    %{
+      status: JsonApi.resource do
+        description "A status"
+        attributes do
+          name :string, "the status name", required: true
+        end
+      end
+    }
+  end
 end

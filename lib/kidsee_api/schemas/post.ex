@@ -29,4 +29,22 @@ defmodule KidseeApi.Schemas.Post do
     |> cast(attrs, [:content, :title, :content_type_id, :user_id, :status_id, :location])
     |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :location])
   end
+
+  def swagger_definitions do
+    use PhoenixSwagger
+    %{
+      post: JsonApi.resource do
+        description "A post"
+        attributes do
+          title :string, "Title of the post", required: true
+          location :string, "location the post was made at", required: true
+          content :string, "the content of the post", required: true
+        end
+        relationship :user
+        relationship :content_type
+        relationship :status
+        relationship :comments, type: :has_many
+      end
+    }
+  end
 end

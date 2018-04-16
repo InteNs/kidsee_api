@@ -20,6 +20,7 @@ defmodule KidseeApiWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: KidseeApiWeb
+      use PhoenixSwagger
       import Plug.Conn
       import KidseeApiWeb.Router.Helpers
       import KidseeApiWeb.Gettext

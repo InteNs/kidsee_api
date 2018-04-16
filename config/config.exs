@@ -19,6 +19,14 @@ config :mime, :types, %{
   "application/vnd.api+json" => ["json-api"]
 }
 
+config :kidsee_api, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: KidseeApiWeb.Router,     # phoenix routes will be converted to swagger paths
+      endpoint: KidseeApiWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+    ]
+  }
+
 # Configures the endpoint
 config :kidsee_api, KidseeApiWeb.Endpoint,
   url: [host: "localhost"],

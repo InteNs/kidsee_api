@@ -44,4 +44,47 @@ defmodule KidseeApiWeb.ContentTypeController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def swagger_definitions do
+    Map.merge(ContentType.swagger_definitions, SwaggerCommon.definitions)
+  end
+
+  swagger_path :index do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    paging
+    response 200, "OK", JsonApi.page(:content_type)
+    response 404, "not_found"
+  end
+
+  swagger_path :show do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    response 200, "OK", JsonApi.single(:content_type)
+    response 404, "not found"
+  end
+
+  swagger_path :create do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:content_type)
+
+    response 201, "created", JsonApi.single(:content_type)
+  end
+
+  swagger_path :update do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:content_type)
+
+    response 200, "OK", JsonApi.single(:content_type)
+  end
+
+  swagger_path :delete do
+    SwaggerCommon.auth
+    response 204, "no content"
+    response 404, "not found"
+  end
 end

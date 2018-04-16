@@ -7,7 +7,7 @@ defmodule KidseeApi.Mixfile do
       version: "0.4.1",
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      compilers: [:phoenix, :gettext, :phoenix_swagger] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps()
@@ -51,7 +51,8 @@ defmodule KidseeApi.Mixfile do
       {:bcrypt_elixir, "~> 1.0"},
       {:ja_serializer, "~> 0.13"},
       {:scrivener, "~> 2.0"},
-      {:scrivener_ecto, "~> 1.0"}
+      {:scrivener_ecto, "~> 1.0"},
+      {:phoenix_swagger, "~> 0.8"}
     ]
   end
 

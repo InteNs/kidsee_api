@@ -16,7 +16,7 @@ use Mix.Config
 config :kidsee_api, KidseeApiWeb.Endpoint,
   http: [port: 4000],
   #load_from_system_env: true,
-  url: [host: "example.com", port: 80],
+  url: [host: "174.138.7.193", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   code_reloader: false

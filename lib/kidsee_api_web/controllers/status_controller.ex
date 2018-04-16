@@ -44,4 +44,47 @@ defmodule KidseeApiWeb.StatusController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def swagger_definitions do
+    Map.merge(Status.swagger_definitions, SwaggerCommon.definitions)
+  end
+
+  swagger_path :index do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    paging
+    response 200, "OK", JsonApi.page(:status)
+    response 404, "not_found"
+  end
+
+  swagger_path :show do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    response 200, "OK", JsonApi.single(:status)
+    response 404, "not found"
+  end
+
+  swagger_path :create do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:status)
+
+    response 201, "created", JsonApi.single(:status)
+  end
+
+  swagger_path :update do
+    SwaggerCommon.content_type
+    SwaggerCommon.auth
+    SwaggerCommon.validation
+    SwaggerCommon.body(:status)
+
+    response 200, "OK", JsonApi.single(:status)
+  end
+
+  swagger_path :delete do
+    SwaggerCommon.auth
+    response 204, "no content"
+    response 404, "not found"
+  end
 end
