@@ -15,6 +15,7 @@ defmodule KidseeApi.Schemas.Location do
       post
       |> cast(attrs, [:name, :description, :address, :lat, :lon])
       |> validate_required([:name, :address])
+      |> unique_constraint(:name)
     end
 
     def swagger_definitions do
