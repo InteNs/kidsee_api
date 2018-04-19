@@ -7,11 +7,11 @@ defmodule KidseeApi.LocationFactory do
 
     def location_factory do
       %Location{
-        name:         "Example name",
-        description:  "Example desciption",
-        address:       "Example address",
-        lat:          12.121342,
-        lon:          32.345434
+        name:         Faker.Name.name(),
+        description:  Faker.Name.name(),
+        address:      Faker.Address.street_address(),
+        lat:          Faker.Address.latitude(),
+        lon:          Faker.Address.longitude()
       }
     end
 
