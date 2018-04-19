@@ -1,5 +1,12 @@
 # KidseeApi
 
+## Database
+Production database credentials
+* host: `174.138.7.193`  
+* db: `kidsee_api_prod`  
+* username: `postgres`  
+* password: `postgres`
+
 ## API endpoints
 
 In order to succsfully call endpoints you need the following:
