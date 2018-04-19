@@ -16,6 +16,14 @@ defmodule KidseeApi.Schemas.Location do
       |> cast(attrs, [:name, :description, :address, :lat, :lon])
       |> validate_required([:name, :address])
       |> unique_constraint(:name)
+      |> round_coordinates
+    end
+
+    def round_coordinates(changeset) do
+      rounded_lat = Float.round(get_change(changeset, :lat), 7)
+      rounded_lon = Float.round(get_change(changeset, :lon), 7)
+      change(changeset, lat: rounded_lat)
+      change(changeset, lon: rounded_lon)
     end
 
     def swagger_definitions do
