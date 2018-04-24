@@ -10,6 +10,10 @@ AUTO_VERSION="build-date+git-revision"
 
 PRODUCTION_HOSTS="174.138.7.193"
 PRODUCTION_USER="deploy"
+
+STAGING_HOSTS="128.199.32.227"
+STAGING_USER="deploy"
+
 DELIVER_TO="/home/deploy/app_release"
 
 pre_erlang_get_and_update_deps() {
