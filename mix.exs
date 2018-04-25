@@ -4,7 +4,7 @@ defmodule KidseeApi.Mixfile do
   def project do
     [
       app: :kidsee_api,
-      version: "0.4.1",
+      version: "0.4.2",
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext, :phoenix_swagger] ++ Mix.compilers,
