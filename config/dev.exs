@@ -42,5 +42,5 @@ config :kidsee_api, KidseeApi.Repo,
   username: "postgres",
   password: "postgres",
   database: "kidsee_api_dev",
-  hostname: "174.138.7.193",
+  hostname: "128.199.32.227",
   pool_size: 10
