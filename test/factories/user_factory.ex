@@ -11,7 +11,6 @@ defmodule KidseeApi.UserFactory do
       username:  sequence(:username, &"test_user_#{&1}"),
       password:  Comeonin.Bcrypt.hashpwsalt("test123"),
       birthdate: Faker.DateTime.backward(2000),
-      avatar:    "-",
       postal_code: Faker.Address.postcode(),
       school:    "Avans"
     }

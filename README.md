@@ -2,9 +2,9 @@
 
 ## Database
 Production database credentials
-* host: `174.138.7.193`  
-* db: `kidsee_api_prod`  
-* username: `postgres`  
+* host: `174.138.7.193`
+* db: `kidsee_api_prod`
+* username: `postgres`
 * password: `postgres`
 
 ## API endpoints
@@ -20,6 +20,12 @@ In order to succsfully call endpoints you need the following:
   * most endpoints expect [json_api document structure](http://jsonapi.org/format/#document-structure)
   * current hostname for the server is: `174.138.7.193`
 
+### user avatar upload/download
+
+  * do a normal `PATCH` request to `/api/users/:id`
+  * make sure the request body contains `data[attributes][avatar] = <file>`
+  * the avatar will be a url like `/uploads/test_pic.png?v=63692587436`
+  * you can make a `GET` request to this url to retrieve the image
 
 ## Deployment
   * on master run `mix edeliver upgrade production`
@@ -31,7 +37,7 @@ In order to authenticate yourself with the server you should do the following:
   * Register a new user `POST /users` including a bcrypt hashed password
   * do a POST request to `/api/tokens` with `email` or `username` and `password` params
   * if the login was succesful the server returns your `token`
-  
+
 ## Development
 
   * Install Elixir 1.6 and Erlang 20.2

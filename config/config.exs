@@ -15,6 +15,9 @@ config :phoenix, :format_encoders,
 config :ja_serializer,
   pluralize_types: true
 
+config :arc,
+  storage: Arc.Storage.Local
+
 config :mime, :types, %{
   "application/vnd.api+json" => ["json-api"]
 }
