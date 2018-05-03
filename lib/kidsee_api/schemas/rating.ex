@@ -1,5 +1,6 @@
 defmodule KidseeApi.Schemas.Rating do
   use KidseeApi.Schema
+  alias KidseeApi.Repo
   alias KidseeApi.Schemas.{Rating, User}
 
   schema "rating" do
@@ -22,6 +23,7 @@ defmodule KidseeApi.Schemas.Rating do
   def changeset(%Rating{} = post, attrs) do
     post
     |> cast(attrs, [:object_type, :object_id, :rating, :description, :user_id])
+    |> unique_constraint(:object_id, name: :index_on_uniqe_rating)
     |> validate_required([:object_type, :object_id, :rating, :user_id])
   end
 

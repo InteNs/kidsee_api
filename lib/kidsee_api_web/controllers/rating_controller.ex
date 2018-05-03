@@ -66,7 +66,7 @@ defmodule KidseeApiWeb.RatingController do
     SwaggerCommon.content_type
     SwaggerCommon.auth
     paging
-    response 200, "OK", JsonApi.page(:post)
+    response 200, "OK", JsonApi.page(:rating)
     response 404, "not_found"
   end
 
@@ -81,7 +81,7 @@ defmodule KidseeApiWeb.RatingController do
     SwaggerCommon.content_type
     SwaggerCommon.auth
     SwaggerCommon.validation
-    SwaggerCommon.body(:post)
+    SwaggerCommon.body(:rating)
 
     response 201, "created", JsonApi.single(:rating)
   end
@@ -90,7 +90,7 @@ defmodule KidseeApiWeb.RatingController do
     SwaggerCommon.content_type
     SwaggerCommon.auth
     SwaggerCommon.validation
-    SwaggerCommon.body(:post)
+    SwaggerCommon.body(:rating)
 
     response 200, "OK", JsonApi.single(:rating)
   end
