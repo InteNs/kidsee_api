@@ -25,7 +25,6 @@ defmodule KidseeApiWeb.Router do
   scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
     resources "/locations", LocationController, only: [:index, :create, :update, :show, :delete]
-    resources "/location-types", LocationTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/statuses", StatusController, only: [:index, :create, :update, :show, :delete]
     resources "/content-types", ContentTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]

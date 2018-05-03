@@ -8,59 +8,45 @@ defmodule KidseeApiWeb.LocationController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, params) do
+  def index(conn, _params) do
     locations = Location
-            |> Repo.preload_schema
-            |> Repo.paginate(params)
-    render(conn, "index.json-api", data: locations.entries, opts: [include: location_includes()])
+               |> Repo.all
+    render(conn, "index.json-api", data: locations)
   end
 
-  def create(conn, %{"data" => location_params}) do
-    location_params = Params.to_attributes(location_params)
-    with {:ok, %Location{id: id}} <- Context.create(Location, location_params) do
-      location = Location
-             |> Repo.preload_schema
-             |> Repo.get!(id)
+  def create(conn, %{"data" => data}) do
+    attrs = Params.to_attributes(data)
+    with {:ok, %Location{} = location} <- Context.create(Location, attrs) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", location_path(conn, :show, location))
-      |> render("show.json-api", data: location, opts: [include: location_includes()])
+      |> render("show.json-api", data: location)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    location = Location
-           |> Repo.preload_schema
-           |> Repo.get!(id)
-    render(conn, "show.json-api", data: location, opts: [include: location_includes()])
+    location = Context.get!(Location, id)
+    render(conn, "index.json-api", data: location)
   end
 
-  def update(conn, %{"id" => id, "data" => location_params}) do
-    location_params = Params.to_attributes(location_params)
-    location = Location
-           |> Repo.preload_schema
-           |> Repo.get!(id)
+  def update(conn, %{"id" => id, "data" => data}) do
+    attrs = Params.to_attributes(data)
+    location = Context.get!(Location, id)
 
-    with {:ok, %Location{} = location} <- Context.update(location, location_params) do
-      render(conn, "show.json-api", data: location)
+    with {:ok, %Location{} = location} <- Context.update(location, attrs) do
+      render conn, "show.json-api", data: location
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    location = Location
-           |> Repo.get!(id)
+    location = Context.get!(Location, id)
     with {:ok, %Location{}} <- Context.delete(location) do
       send_resp(conn, :no_content, "")
     end
   end
 
-  def location_includes, do: "location_type"
-
   def swagger_definitions do
-    Map.merge(
-      Location.swagger_definitions,
-      SwaggerCommon.definitions
-    )
+    Map.merge(Location.swagger_definitions, SwaggerCommon.definitions)
   end
 
   swagger_path :index do
