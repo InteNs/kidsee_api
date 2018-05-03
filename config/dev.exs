@@ -41,6 +41,6 @@ config :kidsee_api, KidseeApi.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "kidsee_api_dev",
+  database: "kidsee_api_prod",
   hostname: "128.199.32.227",
   pool_size: 10
