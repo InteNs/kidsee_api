@@ -30,7 +30,7 @@ defmodule KidseeApi.Schemas.Rating do
   def swagger_definitions do
     use PhoenixSwagger
     %{
-      Rating: JsonApi.resource do
+      rating: JsonApi.resource do
         description "A Rating"
         attributes do
           object_type :string, "the rating object_type", required: true
