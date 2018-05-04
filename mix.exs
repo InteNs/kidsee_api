@@ -38,6 +38,8 @@ defmodule KidseeApi.Mixfile do
       {:ex_machina, "~> 2.1", only: [:dev, :test]},
       {:faker, "~> 0.9",      only: [:dev, :test]},
       {:cors_plug, "~> 1.5"},
+      {:arc, "~> 0.8.0"},
+      {:arc_ecto, "~> 0.7.0"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},

@@ -4,6 +4,8 @@
 /deps
 /*.ez
 priv/repo/migration
+priv/static/
+uploads
 
 # Generated on crash by the VM
 erl_crash.dump
