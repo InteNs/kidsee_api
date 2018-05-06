@@ -1,7 +1,7 @@
 
 defmodule KidseeApi.Schemas.Location do
     use KidseeApi.Schema
-    alias KidseeApi.Schemas.{Location, LocationType}
+    alias KidseeApi.Schemas.{Location, LocationType, Theme, ThemeLocation}
 
     schema "location" do
       field :name, :string
@@ -10,13 +10,15 @@ defmodule KidseeApi.Schemas.Location do
       field :lat, :float
       field :lon, :float
       belongs_to :location_type, LocationType
+      many_to_many :themes, Theme, join_through: ThemeLocation
 
     end
 
     def preload(query) do
       from q in query,
         preload: [
-          :location_type
+          :location_type,
+          themes: ^Repo.preload_schema(Theme, :nested)
         ]
     end
 
@@ -24,9 +26,17 @@ defmodule KidseeApi.Schemas.Location do
     def changeset(%Location{} = post, attrs) do
       post
       |> cast(attrs, [:name, :description, :address, :lat, :lon, :location_type_id])
+      |> put_assoc(:themes, load_themes(attrs))
       |> validate_required([:name, :address, :location_type_id])
       |> unique_constraint(:name)
       |> round_coordinates
+    end
+
+    def load_themes(attrs) do
+      case attrs["themes_ids"] || [] do
+        [] -> []
+        ids -> Repo.all from r in Theme, where: r.id in ^ids
+      end
     end
 
     def round_coordinates(changeset) do
@@ -49,6 +59,7 @@ defmodule KidseeApi.Schemas.Location do
             lon :float, "the longitude of the location", required: true
           end
           relationship :location_type
+          relationship :themes
         end
       }
     end

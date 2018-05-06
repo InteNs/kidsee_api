@@ -29,6 +29,7 @@ defmodule KidseeApiWeb.Router do
     resources "/location-types", LocationTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/statuses", StatusController, only: [:index, :create, :update, :show, :delete]
     resources "/content-types", ContentTypeController, only: [:index, :create, :update, :show, :delete]
+    resources "/themes", ThemeController, only: [:index, :create, :update, :show, :delete]
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]
     resources "/users", UserController, only: [:index, :update, :show, :delete]

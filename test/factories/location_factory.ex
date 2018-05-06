@@ -14,6 +14,7 @@ defmodule KidseeApi.LocationFactory do
         lat:           Faker.Address.latitude(),
         lon:           Faker.Address.longitude(),
         location_type: LocationTypeFactory.insert(:location_type),
+        themes:        []
 
       }
     end
