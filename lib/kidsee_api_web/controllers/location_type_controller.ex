@@ -73,7 +73,7 @@ defmodule KidseeApiWeb.LocationTypeController do
     SwaggerCommon.validation
     SwaggerCommon.body(:location_type)
 
-    response 201, "created", JsonApi.single(:locationv)
+    response 201, "created", JsonApi.single(:location_type)
   end
 
   swagger_path :update do

@@ -37,12 +37,12 @@ defmodule KidseeApi.Schemas.Theme do
   def swagger_definitions do
     use PhoenixSwagger
     %{
-      content_type: JsonApi.resource do
+      theme: JsonApi.resource do
         description "A theme"
         attributes do
           name :string, "the theme name", required: true
         end
-        relationship :themes
+        relationship :locations
       end
     }
   end
