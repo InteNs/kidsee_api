@@ -7,6 +7,12 @@ Production database credentials
 * username: `postgres`
 * password: `postgres`
 
+Staging database credentials (yes only the host differs!)
+* host: `128.199.32.227`
+* db: `kidsee_api_prod`
+* username: `postgres`
+* password: `postgres`
+
 ## API endpoints
 
 In order to succsfully call endpoints you need the following:
