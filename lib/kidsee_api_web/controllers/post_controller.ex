@@ -8,9 +8,13 @@ defmodule KidseeApiWeb.PostController do
 
   action_fallback KidseeApiWeb.FallbackController
 
+  @whitelist ~w(content title status_id content_type_id user_id location_id)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
   def index(conn, params) do
     posts = Post
             |> Repo.preload_schema
+            |> build_query(conn, params)
             |> Repo.paginate(params)
     render(conn, "index.json-api", data: posts.entries, opts: [include: post_includes()])
   end

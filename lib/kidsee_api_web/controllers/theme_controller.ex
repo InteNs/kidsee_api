@@ -8,9 +8,13 @@ defmodule KidseeApiWeb.ThemeController do
 
   action_fallback KidseeApiWeb.FallbackController
 
+  @whitelist ~w(name)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
   def index(conn, params) do
     themes = Theme
             |> Repo.preload_schema
+            |> build_query(conn, params)
             |> Repo.paginate(params)
     render(conn, "index.json-api", data: themes.entries, opts: [include: theme_includes()])
   end
