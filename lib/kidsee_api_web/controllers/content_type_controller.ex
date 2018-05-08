@@ -8,9 +8,13 @@ defmodule KidseeApiWeb.ContentTypeController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, _params) do
+  @whitelist ~w(name description)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
+  def index(conn, params) do
     content_types = ContentType
-               |> Repo.all
+                    |> build_query(conn, params)
+                    |> Repo.all
     render(conn, "index.json-api", data: content_types)
   end
 

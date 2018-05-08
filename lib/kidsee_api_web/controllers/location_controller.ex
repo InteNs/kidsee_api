@@ -8,9 +8,13 @@ defmodule KidseeApiWeb.LocationController do
 
   action_fallback KidseeApiWeb.FallbackController
 
+  @whitelist ~w(name description address lat lon location_type_id)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
   def index(conn, params) do
     locations = Location
             |> Repo.preload_schema
+            |> build_query(conn, params)
             |> Repo.paginate(params)
     render(conn, "index.json-api", data: locations.entries, opts: [include: location_includes()])
   end

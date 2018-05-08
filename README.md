@@ -33,6 +33,10 @@ In order to succsfully call endpoints you need the following:
   * the avatar will be a url like `/uploads/test_pic.png?v=63692587436`
   * you can make a `GET` request to this url to retrieve the image
 
+### filering and sorting
+  * sort by adding to url: `?sort=username` for `asc`, `?sort=-username` for `desc`, `?sort=username,email` for multiple sorts
+  * filter by adding to url: `?filter[name]=Brian&filter[age]=99`
+
 ## Deployment
   * on master run `mix edeliver upgrade production`
 

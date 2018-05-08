@@ -8,10 +8,14 @@ defmodule KidseeApiWeb.RatingController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  def index(conn, _params) do
+  @whitelist ~w(description rating object_id object_type)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
+  def index(conn, params) do
     ratings = Rating
-               |> Repo.preload_schema
-               |> Repo.all
+              |> Repo.preload_schema
+              |> build_query(conn, params)
+              |> Repo.all
     render(conn, "index.json-api", data: ratings)
   end
 

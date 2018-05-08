@@ -24,6 +24,16 @@ defmodule KidseeApiWeb do
       import Plug.Conn
       import KidseeApiWeb.Router.Helpers
       import KidseeApiWeb.Gettext
+
+      import Ecto.Query
+      use Inquisitor
+      use Inquisitor.JsonApi.Sort
+      use Inquisitor.JsonApi.Filter
+
+      def filter(query, attr, value) do
+        from q in query,
+          where: field(q, ^String.to_existing_atom(attr)) == ^value
+      end
     end
   end
 

@@ -8,9 +8,13 @@ defmodule KidseeApiWeb.CommentController do
 
   action_fallback KidseeApiWeb.FallbackController
 
+  @whitelist ~w(post_id user_id content_type_id content)
+  def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
+
   def index(conn, params) do
     comments = Comment
                |> Repo.preload_schema
+               |> build_query(conn, params)
                |> Repo.paginate(params)
     render(conn, "index.json-api", data: comments.entries, opts: [include: comment_includes()])
   end

@@ -54,6 +54,8 @@ defmodule KidseeApi.Mixfile do
       {:ja_serializer, "~> 0.13"},
       {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 1.0"},
+      {:inquisitor, "~>0.5"},
+      {:inquisitor_jsonapi, "~>0.1"},
       {:phoenix_swagger, "~> 0.8"}
     ]
   end
