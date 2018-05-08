@@ -22,9 +22,12 @@ defmodule KidseeApiWeb.RatingController do
   def create(conn, %{"data" => rating_params}) do
    rating_params = Params.to_attributes(rating_params)
     with {:ok, %Rating{id: id}} <- Context.create(Rating, rating_params) do
+
       rating = Rating
              |> Repo.preload_schema
              |> Repo.get!(id)
+
+      Context.populate_rating_object(rating)
       conn
       |> put_status(:created)
       |> put_resp_header("location", rating_path(conn, :show, rating))
