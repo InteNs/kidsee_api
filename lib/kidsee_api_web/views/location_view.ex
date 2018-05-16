@@ -9,6 +9,7 @@ defmodule KidseeApiWeb.LocationView do
     :description,
     :address,
     :lon,
-    :lat
+    :lat,
+    :rating
   ]
 end

@@ -4,15 +4,16 @@ defmodule KidseeApi.RatingFactory do
     alias KidseeApi.Schemas.Rating
 
     use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.RatingView
-    alias KidseeApi.UserFactory
+    alias KidseeApi.{UserFactory, LocationFactory}
 
     def rating_factory do
+      location =  LocationFactory.insert(:location)
       %Rating{
-        object_type: "Example object type",
-        object_id:   1,
+        object_type: "location",
+        object_id:   location.id,
         rating:      5,
         description: "Example description",
-        user: UserFactory.insert(:user)
+        user:        UserFactory.insert(:user)
       }
     end
 
