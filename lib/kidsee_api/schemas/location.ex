@@ -29,7 +29,6 @@ defmodule KidseeApi.Schemas.Location do
       |> cast_assoc(:themes, load_themes(attrs))
       |> validate_required([:name, :address, :location_type_id])
       |> unique_constraint(:name)
-      # |> round_coordinates
     end
 
     def load_themes(attrs) do
