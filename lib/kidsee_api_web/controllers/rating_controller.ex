@@ -8,7 +8,7 @@ defmodule KidseeApiWeb.RatingController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  @whitelist ~w(description rating object_id object_type)
+  @whitelist ~w(description rating object_id object_type user_id)
   def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
 
   def index(conn, params) do
