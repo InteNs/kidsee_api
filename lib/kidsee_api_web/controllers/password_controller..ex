@@ -14,7 +14,7 @@ defmodule KidseeApiWeb.PasswordController do
     new_password = get_in(params, ["attributes", "password"])
     if String.equivalent?(new_password, old_password) do
       conn = put_status(conn, :unprocessable_entity)
-      text conn, "New password cannot be the same as the new password!"
+      text conn, "New password cannot be the same as the old password!"
     else
       user = Ecto.Changeset.change user, password: new_password
       case Repo.update user do
