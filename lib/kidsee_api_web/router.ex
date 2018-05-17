@@ -33,6 +33,7 @@ defmodule KidseeApiWeb.Router do
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]
     resources "/users", UserController, only: [:index, :update, :show, :delete]
+    patch "/password-update/:id", PasswordController, :update
   end
 
   def swagger_info do
