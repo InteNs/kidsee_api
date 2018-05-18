@@ -22,6 +22,16 @@ config :mime, :types, %{
   "application/vnd.api+json" => ["json-api"]
 }
 
+config :kidsee_api, KidseeApi.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "in-v3.mailjet.com",
+  port: 25,
+  username: "9078f4d4435dc73ad41debc12b636150", #TODO set these credentials in env variables
+  password: "37aa0be926e3ac89d4ea5cb9401e43c7",
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
+
 config :kidsee_api, :phoenix_swagger,
   swagger_files: %{
     "priv/static/swagger.json" => [
