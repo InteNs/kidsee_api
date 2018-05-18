@@ -20,7 +20,7 @@ defmodule KidseeApi.Mixfile do
   def application do
     [
       mod: {KidseeApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo]
     ]
   end
 
@@ -57,7 +57,9 @@ defmodule KidseeApi.Mixfile do
       {:inquisitor, "~>0.5"},
       {:inquisitor_jsonapi, "~>0.1"},
       {:statistics, "~> 0.5.0"},
-      {:phoenix_swagger, "~> 0.8"}
+      {:phoenix_swagger, "~> 0.8"},
+      {:bamboo, "~> 0.8.0"},
+      {:bamboo_smtp, "~> 1.4"}
     ]
   end
 

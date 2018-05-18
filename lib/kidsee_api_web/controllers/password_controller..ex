@@ -3,10 +3,12 @@ defmodule KidseeApiWeb.PasswordController do
 
   alias KidseeApi.Context
   alias KidseeApi.Schemas.User
-  alias JaSerializer.Params
   alias KidseeApi.Repo
+  alias KidseeApi.Email
+  alias KidseeApi.Mailer
 
   action_fallback KidseeApiWeb.FallbackController
+  @chars "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> String.split("")
 
   def update(conn, %{"id" => id, "data" => params}) do
     user = Context.get!(User, id)
@@ -18,19 +20,36 @@ defmodule KidseeApiWeb.PasswordController do
     else
       user = Ecto.Changeset.change user, password: new_password
       case Repo.update user do
-        {:ok, struct}       -> conn |> send_succes
-        {:error, changeset} -> conn |> send_error
+        {:ok, _}    -> conn |> send_succes("Password has been updated!")
+        {:error, _} -> conn |> send_error("Something went wrong!")
         end
     end
   end
 
-  def send_succes(conn) do
-    conn = put_status(conn, :ok)
-    text conn, "Password has been updated!"
+  def send_succes(conn, message) do
+    send_resp(conn, 200, message)
   end
 
-  def send_error(conn) do
-    conn = put_status(conn, :unprocessable_entity)
-    text conn, "Something went wrong!"
+  def send_error(conn, message) do
+    send_resp(conn, 422, message)
+  end
+
+  def reset(conn, %{"data" => params}) do
+    email = get_in(params, ["attributes", "email"])
+    user = Repo.get_by(User, email: email)
+    plain_password = generate_password(10)
+    password = Comeonin.Bcrypt.hashpwsalt(plain_password)
+    user = Ecto.Changeset.change user, password: password
+    case Repo.update user do
+      {:ok, _}    -> Email.reset_password("cedricremond@live.nl", plain_password) |> Mailer.deliver_now
+                     conn |> send_succes("Password has been reset and email has been send!")
+      {:error, _} -> conn |> send_error("Something went wrong!")
+      end
+  end
+
+  def generate_password(length) do
+    Enum.reduce((1..length), [], fn (_i, acc) ->
+      [Enum.random(@chars) | acc]
+    end) |> Enum.join("")
   end
 end
