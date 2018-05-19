@@ -13,9 +13,10 @@ defmodule KidseeApiWeb.LocationController do
 
   def index(conn, params) do
     locations = Location
-            |> Repo.preload_schema
-            |> build_query(conn, params)
-            |> Repo.paginate(params)
+                |> Repo.preload_schema
+                |> Location.for_theme(Map.get(params, "theme_id"))
+                |> build_query(conn, params)
+                |> Repo.paginate(params)
     render(conn, "index.json-api", data: locations.entries, opts: [include: location_includes()])
   end
 
