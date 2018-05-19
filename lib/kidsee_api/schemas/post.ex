@@ -5,6 +5,7 @@ defmodule KidseeApi.Schemas.Post do
   schema "post" do
     field :content, :string
     field :title, :string
+    field :rating, :float
 
     belongs_to :status, Status
     belongs_to :content_type, ContentType
@@ -26,7 +27,7 @@ defmodule KidseeApi.Schemas.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:content, :title, :content_type_id, :user_id, :status_id, :location_id])
+    |> cast(attrs, [:rating, :content, :title, :content_type_id, :user_id, :status_id, :location_id])
     |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :location_id])
   end
 
