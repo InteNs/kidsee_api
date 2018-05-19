@@ -38,6 +38,14 @@ defmodule KidseeApi.Schemas.Location do
       end
     end
 
+    def for_theme(query, nil), do: query
+    def for_theme(query \\ Location, theme_id) do
+      from l in query,
+        join: tl in ThemeLocation,
+        on: tl.location_id == l.id,
+        where: tl.theme_id == ^theme_id
+    end
+
     def swagger_definitions do
       use PhoenixSwagger
       %{
