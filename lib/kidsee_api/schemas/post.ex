@@ -1,6 +1,6 @@
 defmodule KidseeApi.Schemas.Post do
   use KidseeApi.Schema
-  alias KidseeApi.Schemas.{Comment, Post, Status, ContentType, User, Location}
+  alias KidseeApi.Schemas.{ThemeLocation, Comment, Post, Status, ContentType, User, Location}
 
   schema "post" do
     field :content, :string
@@ -14,6 +14,14 @@ defmodule KidseeApi.Schemas.Post do
 
     has_many :comments, Comment
     timestamps()
+  end
+
+  def for_theme(query, nil), do: query
+  def for_theme(query \\ Post, theme_id) do
+    from p in query,
+      join: l in assoc(p, :location),
+      join: tl in ThemeLocation, on: tl.location_id == l.id,
+      where: tl.theme_id == ^theme_id
   end
 
   def preload(query) do

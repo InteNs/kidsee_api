@@ -14,6 +14,7 @@ defmodule KidseeApiWeb.PostController do
   def index(conn, params) do
     posts = Post
             |> Repo.preload_schema
+            |> Post.for_theme(Map.get(params, "theme_id"))
             |> build_query(conn, params)
             |> Repo.paginate(params)
     render(conn, "index.json-api", data: posts.entries, opts: [include: post_includes()])
