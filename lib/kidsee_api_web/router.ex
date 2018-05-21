@@ -16,6 +16,7 @@ defmodule KidseeApiWeb.Router do
 
     resources "/users", UserController, only: [:options, :create]
     post "/tokens", TokenController, :create
+    post "/password-reset", PasswordController, :reset
   end
 
   scope "/api/swagger" do
@@ -38,7 +39,6 @@ defmodule KidseeApiWeb.Router do
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]
     resources "/users", UserController, only: [:index, :update, :show, :delete]
     patch "/password-update/:id", PasswordController, :update
-    post "/password-reset", PasswordController, :reset
 
   end
 
