@@ -6,6 +6,7 @@ defmodule KidseeApiWeb.AssignmentView do
 
   attributes [
     :name,
+    :content,
     :description,
     :rating
   ]

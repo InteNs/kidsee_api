@@ -10,8 +10,8 @@ defmodule KidseeApi.Schemas.AssignmentType do
   def preload(query), do: query
 
   @doc false
-  def changeset(%AssignmentType{} = post, attrs) do
-    post
+  def changeset(%AssignmentType{} = assignment_type, attrs) do
+    assignment_type
     |> cast(attrs, [:name])
     |> validate_required([:name])
   end
