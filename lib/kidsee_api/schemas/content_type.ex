@@ -22,10 +22,10 @@ defmodule KidseeApi.Schemas.ContentType do
     use PhoenixSwagger
     %{
       content_type: JsonApi.resource do
-        description "A status"
+        description "A content type"
         attributes do
-          name :string, "the status name", required: true
-          description :string, "the status description", required: true
+          name :string, "the content type name", required: true
+          description :string, "the content type description", required: true
         end
       end
     }
