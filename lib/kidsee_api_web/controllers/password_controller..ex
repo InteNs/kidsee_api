@@ -41,7 +41,7 @@ defmodule KidseeApiWeb.PasswordController do
     password = Comeonin.Bcrypt.hashpwsalt(plain_password)
     user = Ecto.Changeset.change user, password: password
     case Repo.update user do
-      {:ok, _}    -> Email.reset_password("cedricremond@live.nl", plain_password) |> Mailer.deliver_now
+      {:ok, _}    -> Email.reset_password(email, plain_password) |> Mailer.deliver_now
                      conn |> send_succes("Password has been reset and email has been send!")
       {:error, _} -> conn |> send_error("Something went wrong!")
       end
