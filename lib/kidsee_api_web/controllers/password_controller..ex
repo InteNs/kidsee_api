@@ -20,8 +20,8 @@ defmodule KidseeApiWeb.PasswordController do
     else
       user = Ecto.Changeset.change user, password: new_password
       case Repo.update user do
-        {:ok, _}    -> conn |> send_succes("Password has been updated!")
-        {:error, _} -> conn |> send_error("Something went wrong!")
+        {:ok, _}    -> conn |> send_succes("{\"message\":\Password has been updated!\"}")
+        {:error, _} -> conn |> send_error("{\"message\":\Something went wrong!\"}")
         end
     end
   end
@@ -42,8 +42,8 @@ defmodule KidseeApiWeb.PasswordController do
     user = Ecto.Changeset.change user, password: password
     case Repo.update user do
       {:ok, _}    -> Email.reset_password(email, plain_password) |> Mailer.deliver_now
-                     conn |> send_succes("Password has been reset and email has been send!")
-      {:error, _} -> conn |> send_error("Something went wrong!")
+                     conn |> send_succes("{\"message\":\"Password has been reset and email has been send!\"}")
+      {:error, _} -> conn |> send_error("{\"message\"Something went wrong!\"}")
       end
   end
 
