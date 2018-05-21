@@ -23,7 +23,7 @@ defmodule KidseeApiWeb.AssignmentTypeController do
     with {:ok, %AssignmentType{} = assignment_type} <- Context.create(AssignmentType, attrs) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", assignment_type_path(conn, :show, assignment_type))
+      |> put_resp_header("assignment_type", assignment_type_path(conn, :show, assignment_type))
       |> render("show.json-api", data: assignment_type)
     end
   end
@@ -83,7 +83,7 @@ defmodule KidseeApiWeb.AssignmentTypeController do
     SwaggerCommon.validation
     SwaggerCommon.body(:assignment_type)
 
-    response 200, "OK", JsonApi.single(:content_type)
+    response 200, "OK", JsonApi.single(:location_type)
   end
 
   swagger_path :delete do

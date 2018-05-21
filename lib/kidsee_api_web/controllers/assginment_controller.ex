@@ -21,6 +21,7 @@ defmodule KidseeApiWeb.AssignmentController do
 
   def create(conn, %{"data" => assignment_params}) do
     assignment_params = Params.to_attributes(assignment_params)
+    IO.inspect assignment_params
     with {:ok, %Assignment{id: id}} <- Context.create(Assignment, assignment_params) do
       assignment = Assignment
              |> Repo.preload_schema

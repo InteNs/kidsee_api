@@ -32,8 +32,8 @@ defmodule KidseeApi.Schemas.Assignment do
     def swagger_definitions do
       use PhoenixSwagger
       %{
-        assginment: JsonApi.resource do
-          description "A assginment"
+        assignment: JsonApi.resource do
+          description "A assignment"
           attributes do
             name :string, "the assignment name", required: true
             description :string, "the assignment description", required: true
