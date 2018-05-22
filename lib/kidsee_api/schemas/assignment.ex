@@ -6,6 +6,7 @@ defmodule KidseeApi.Schemas.Assignment do
     schema "assignment" do
       field :name, :string
       field :description, :string
+      field :content, :string
       field :rating, :float
 
       belongs_to :location, Location
@@ -22,10 +23,10 @@ defmodule KidseeApi.Schemas.Assignment do
     end
 
     @doc false
-    def changeset(%Assignment{} = post, attrs) do
-      post
-      |> cast(attrs, [:name, :location_id, :assignment_type_id])
-      |> validate_required([:name, :location_id , :assignment_type_id])
+    def changeset(%Assignment{} = assignment, attrs) do
+      assignment
+      |> cast(attrs, [:name, :description, :content, :location_id, :assignment_type_id])
+      |> validate_required([:name, :description, :content, :location_id , :assignment_type_id])
       |> unique_constraint(:name)
     end
 
@@ -36,6 +37,7 @@ defmodule KidseeApi.Schemas.Assignment do
           description "A assginment"
           attributes do
             name :string, "the assignment name", required: true
+            content :string, "the assignment content", required: true
             description :string, "the assignment description", required: true
           end
           relationship :location
