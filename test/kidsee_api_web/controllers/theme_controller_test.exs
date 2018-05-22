@@ -11,7 +11,7 @@ defmodule KidseeApiWeb.ContentTypeControllerTest do
 
   describe "create" do
     test "renders theme when data is valid", %{conn: conn} do
-      conn_create = post conn, theme_path(conn, :create), build(:jsonapi_theme)
+      conn_create = post conn, theme_path(conn, :create), json_api_params_for(:theme)
       assert %{"id" => id} = json_response(conn_create, 201)["data"]
 
       conn_get = get conn, theme_path(conn, :show, id)
