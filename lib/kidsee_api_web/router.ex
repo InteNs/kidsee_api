@@ -14,7 +14,7 @@ defmodule KidseeApiWeb.Router do
   scope "/api", KidseeApiWeb do
     pipe_through :api
 
-    resources "/users", UserController, only: [:options, :create]
+    resources "/users", UserController, only: [:create]
     post "/tokens", TokenController, :create
     post "/password-reset", PasswordController, :reset
   end
@@ -34,6 +34,7 @@ defmodule KidseeApiWeb.Router do
     resources "/content-types", ContentTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/themes", ThemeController, only: [:index, :create, :update, :show, :delete] do
       resources "/posts", PostController, only: [:index]
+      resources "/locations", LocationController, only: [:index]
     end
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]

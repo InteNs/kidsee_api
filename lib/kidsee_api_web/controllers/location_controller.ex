@@ -14,6 +14,7 @@ defmodule KidseeApiWeb.LocationController do
   def index(conn, params) do
     locations = Location
                 |> Repo.preload_schema
+                |> Location.for_theme(Map.get(params, "theme_id"))
                 |> build_query(conn, params)
                 |> Repo.paginate(params)
     render(conn, "index.json-api", data: locations.entries, opts: [include: location_includes()])
@@ -58,7 +59,7 @@ defmodule KidseeApiWeb.LocationController do
     end
   end
 
-  def location_includes, do: "location_type"
+  def location_includes, do: "location_type,themes"
 
   def swagger_definitions do
     Map.merge(

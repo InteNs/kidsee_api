@@ -1,7 +1,8 @@
 defmodule KidseeApiWeb.ThemeView do
   use KidseeApiWeb, :view
 
-  has_many :locations, serializer: KidseeApiWeb.LocationView
+  has_many :locations, links: [ related: "/themes/:id/locations" ]
+
   attributes [
     :name
     ]
