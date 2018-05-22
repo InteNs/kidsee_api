@@ -28,7 +28,7 @@ end
     setup do [status: insert(:status)] end
 
     test "renders status when data is valid", %{conn: conn, status: status} do
-      conn_patch =(patch conn, status_path(conn, :update, status), build(:jsonapi_status))
+      conn_patch = patch conn, status_path(conn, :update, status), build(:jsonapi_status)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, status_path(conn, :show, id)

@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.AssignmentTypeControllerTest do
     setup do [assignment_type: insert(:assignment_type)] end
 
     test "renders assignment_type when data is valid", %{conn: conn, assignment_type: assignment_type} do
-      conn_patch =(patch conn, assignment_type_path(conn, :update, assignment_type), build(:jsonapi_assignment_type))
+      conn_patch = patch conn, assignment_type_path(conn, :update, assignment_type), build(:jsonapi_assignment_type)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, assignment_type_path(conn, :show, id)
