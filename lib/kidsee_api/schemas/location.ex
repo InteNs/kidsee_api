@@ -18,7 +18,7 @@ defmodule KidseeApi.Schemas.Location do
       from q in query,
         preload: [
           :location_type,
-          themes: ^Repo.preload_schema(Theme, :nested)
+          themes: ^Repo.preload_schema(Theme)
         ]
     end
 

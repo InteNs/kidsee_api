@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.ThemeController do
     end
   end
 
-  def theme_includes, do: "locations"
+  def theme_includes, do: ""
 
   def swagger_definitions do
     Map.merge(

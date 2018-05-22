@@ -9,10 +9,7 @@ defmodule KidseeApi.Schemas.Theme do
   end
 
   def preload(query) do
-    from q in query,
-      preload: [
-        locations: ^Repo.preload_schema(Location)
-      ]
+    from q in query
   end
 
   def preload(query, :nested) do
