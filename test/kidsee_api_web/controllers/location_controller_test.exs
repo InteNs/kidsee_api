@@ -28,7 +28,7 @@ describe "update" do
   setup do [location: insert(:location)] end
 
   test "renders location when data is valid", %{conn: conn, location: location} do
-    conn_patch =(patch conn, location_path(conn, :update, location), build(:jsonapi_location))
+    conn_patch = patch conn, location_path(conn, :update, location), build(:jsonapi_location)
     assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
     conn_get = get conn, location_path(conn, :show, id)

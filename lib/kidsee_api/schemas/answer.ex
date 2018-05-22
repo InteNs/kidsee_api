@@ -1,4 +1,3 @@
-
 defmodule KidseeApi.Schemas.Answer do
     use KidseeApi.Schema
     alias KidseeApi.Schemas.{Answer, AnswerType, Assignment}

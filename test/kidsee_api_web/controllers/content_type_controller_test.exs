@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.ContentTypeControllerTest do
     setup do [content_type: insert(:content_type)] end
 
     test "renders content_type when data is valid", %{conn: conn, content_type: content_type} do
-      conn_patch =(patch conn, content_type_path(conn, :update, content_type), build(:jsonapi_content_type))
+      conn_patch = patch conn, content_type_path(conn, :update, content_type), build(:jsonapi_content_type)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, content_type_path(conn, :show, id)

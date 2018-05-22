@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.PostControllerTest do
     setup do [post: insert(:post)] end
 
     test "renders post when data is valid", %{conn: conn, post: post} do
-      conn_patch =(patch conn, post_path(conn, :update, post), build(:jsonapi_post))
+      conn_patch = patch conn, post_path(conn, :update, post), build(:jsonapi_post)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, post_path(conn, :show, id)
