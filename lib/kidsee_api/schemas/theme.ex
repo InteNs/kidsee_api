@@ -20,15 +20,13 @@ defmodule KidseeApi.Schemas.Theme do
   def changeset(%Theme{} = post, attrs) do
     post
     |> cast(attrs, [:name])
-    |> put_assoc(:locations, load_themes(attrs))
+    |> load_locations(Map.get(attrs, "location_ids"))
     |> validate_required([:name])
   end
 
-  def load_themes(attrs) do
-    case attrs["locations_ids"] || [] do
-      [] -> []
-      ids -> Repo.all from r in Location, where: r.id in ^ids
-    end
+  def load_locations(changeset, nil), do: changeset
+  def load_locations(changeset, ids) do
+    put_assoc(changeset, :locations, Repo.all(from r in Location, where: r.id in ^ids))
   end
 
   def swagger_definitions do
