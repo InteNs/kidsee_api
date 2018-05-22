@@ -17,7 +17,9 @@ defmodule KidseeApi.JsonApiParamsStrategy do
     update_in(data["data"]["relationships"], fn (relationships) ->
       case relationships do
         nil -> nil
-        _ -> Enum.filter(relationships, fn {_, val} -> val != %{} end)
+        _ -> Enum.filter(relationships, fn {_, val} ->
+          val != %{} && !Map.has_key?(val, "links")
+        end)
       end
     end)
   end
