@@ -28,7 +28,7 @@ end
     setup do [comment: insert(:comment)] end
 
     test "renders comment when data is valid", %{conn: conn, comment: comment} do
-      conn_patch =(patch conn, comment_path(conn, :update, comment), build(:jsonapi_comment))
+      conn_patch = patch conn, comment_path(conn, :update, comment), build(:jsonapi_comment)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, comment_path(conn, :show, id)

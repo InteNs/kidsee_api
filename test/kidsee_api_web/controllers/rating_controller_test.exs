@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.RatingControllerTest do
     setup do [rating: insert(:rating)] end
 
     test "renders rating when data is valid", %{conn: conn, rating: rating} do
-      conn_patch =(patch conn, rating_path(conn, :update, rating), build(:jsonapi_rating))
+      conn_patch = patch conn, rating_path(conn, :update, rating), build(:jsonapi_rating)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, rating_path(conn, :show, id)

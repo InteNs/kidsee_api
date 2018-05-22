@@ -1,7 +1,7 @@
 
 defmodule KidseeApi.Schemas.Assignment do
     use KidseeApi.Schema
-    alias KidseeApi.Schemas.{Assignment, AssignmentType, Location}
+    alias KidseeApi.Schemas.{Assignment, AssignmentType, AnswerType, Location}
 
     schema "assignment" do
       field :name, :string
@@ -9,6 +9,7 @@ defmodule KidseeApi.Schemas.Assignment do
       field :content, :string
       field :rating, :float
 
+      belongs_to :answer_type, AnswerType
       belongs_to :location, Location
       belongs_to :assignment_type, AssignmentType
       timestamps()

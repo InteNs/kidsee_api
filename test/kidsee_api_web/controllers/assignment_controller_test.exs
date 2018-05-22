@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.AssignmentControllerTest do
     setup do [assignment: insert(:assignment)] end
 
     test "renders assignment when data is valid", %{conn: conn, assignment: assignment} do
-      conn_patch =(patch conn, assignment_path(conn, :update, assignment), build(:jsonapi_assignment))
+      conn_patch = patch conn, assignment_path(conn, :update, assignment), build(:jsonapi_assignment)
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, assignment_path(conn, :show, id)
