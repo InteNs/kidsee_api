@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.LocationController do
     end
   end
 
-  def location_includes, do: "location_type,themes"
+  def location_includes, do: "location_type"
 
   def swagger_definitions do
     Map.merge(
