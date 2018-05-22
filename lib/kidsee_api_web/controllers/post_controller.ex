@@ -59,7 +59,7 @@ defmodule KidseeApiWeb.PostController do
     end
   end
 
-  def post_includes, do: "content_type,user,status,comments"
+  def post_includes, do: "content_type,user,status,comments,location"
 
   def swagger_definitions do
     Map.merge(
