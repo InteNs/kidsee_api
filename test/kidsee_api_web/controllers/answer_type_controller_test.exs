@@ -28,7 +28,7 @@
 #    setup do [answer_type: insert(:answer_type)] end
 #
 #    test "renders answer_type when data is valid", %{conn: conn, answer_type: answer_type} do
-#      conn_patch = patch conn, answer_type_path(conn, :update, answer_type), build(:jsonapi_answer_type)
+#      conn_patch = patch conn, answer_type_path(conn, :update, answer_type), build(:jsonapi_answer_type
 #      assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 #
 #      conn_get = get conn, answer_type_path(conn, :show, id)

@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.AssignmentController do
     end
   end
 
-  def assignment_includes, do: "assignment_type, location"
+  def assignment_includes, do: "assignment_type,location"
 
   def swagger_definitions do
     Map.merge(
