@@ -19,6 +19,7 @@ defmodule KidseeApi.Schemas.Assignment do
       from q in query,
         preload: [
           :assignment_type,
+          :answer_type,
           location: ^Repo.preload_schema(Location)
         ]
     end
