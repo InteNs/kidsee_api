@@ -28,7 +28,7 @@ defmodule KidseeApiWeb.AnswerControllerTest do
     setup do [answer: insert(:answer)] end
 
     test "renders answer when data is valid", %{conn: conn, answer: answer} do
-      conn_patch = patch conn, answer_path(conn, :update, answer), build(:jsonapi_answer)
+      conn_patch =(patch conn, answer_path(conn, :update, answer), build(:jsonapi_answer))
       assert %{"id" => id} = json_response(conn_patch, 200)["data"]
 
       conn_get = get conn, answer_path(conn, :show, id)
