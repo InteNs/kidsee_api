@@ -17,6 +17,13 @@ defmodule KidseeApi.Schemas.Answer do
         ]
     end
 
+    def preload(query, :nested) do
+      from q in query,
+        preload: [
+          :assignment,
+        ]
+    end
+
     @doc false
     def changeset(%Answer{} = answer, attrs) do
       answer
