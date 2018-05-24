@@ -1,4 +1,4 @@
-defmodule KidseeApiWeb.ContentTypeControllerTest do
+defmodule KidseeApiWeb.ThemeControllerTest do
   use KidseeApiWeb.ConnCase do
     import KidseeApi.ThemeFactory
   end

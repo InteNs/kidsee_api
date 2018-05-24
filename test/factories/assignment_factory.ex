@@ -1,8 +1,8 @@
 defmodule KidseeApi.AssignmentFactory do
     use ExMachina.Ecto, repo: KidseeApi.Repo
 
-    alias KidseeApi.Schemas.{Assignment, AssignmentType}
-    alias KidseeApi.{LocationFactory, AssignmentFactory, AssignmentTypeFactory}
+    alias KidseeApi.Schemas.{Assignment}
+    alias KidseeApi.{LocationFactory, AnswerTypeFactory, AssignmentTypeFactory}
 
     use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.AssignmentView
 
@@ -12,7 +12,8 @@ defmodule KidseeApi.AssignmentFactory do
         content:         "Example content",
         description:     "Example description",
         location:        LocationFactory.insert(:location),
-        assignment_type: AssignmentTypeFactory.insert(:assignment_type)
+        assignment_type: AssignmentTypeFactory.insert(:assignment_type),
+        answer_type:     AnswerTypeFactory.insert(:answer_type)
       }
     end
 
