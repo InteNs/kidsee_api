@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.UserAnswerController do
     end
   end
 
-  def answer_includes, do: "user, assignment, answer"
+  def answer_includes, do: "user,assignment,answer"
 
   def swagger_definitions do
     Map.merge(
