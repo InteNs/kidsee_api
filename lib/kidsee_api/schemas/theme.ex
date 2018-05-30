@@ -1,9 +1,11 @@
 defmodule KidseeApi.Schemas.Theme do
   use KidseeApi.Schema
+  use Arc.Ecto.Schema
   alias KidseeApi.Schemas.{Theme, Location, ThemeLocation}
 
   schema "theme" do
     field :name, :string
+    field :icon, KidseeApiWeb.Avatar.Type 
     many_to_many :locations, Location, join_through: ThemeLocation
     timestamps()
   end
@@ -20,6 +22,7 @@ defmodule KidseeApi.Schemas.Theme do
   def changeset(%Theme{} = post, attrs) do
     post
     |> cast(attrs, [:name])
+    |> cast_attachments(attrs, [:icon])
     |> load_locations(Map.get(attrs, "location_ids"))
     |> validate_required([:name])
   end
@@ -36,6 +39,7 @@ defmodule KidseeApi.Schemas.Theme do
         description "A theme"
         attributes do
           name :string, "the theme name", required: true
+          icon :string, "url to the theme icon"
         end
         relationship :locations
       end
