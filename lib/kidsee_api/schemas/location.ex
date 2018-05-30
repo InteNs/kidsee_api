@@ -1,7 +1,7 @@
 
 defmodule KidseeApi.Schemas.Location do
     use KidseeApi.Schema
-    alias KidseeApi.Schemas.{Location, LocationType, Theme, ThemeLocation}
+    alias KidseeApi.Schemas.{Location, Theme, ThemeLocation}
 
     schema "location" do
       field :name, :string
@@ -11,14 +11,12 @@ defmodule KidseeApi.Schemas.Location do
       field :lon, :float
       field :rating, :float
       field :website_link, :string
-      belongs_to :location_type, LocationType
       many_to_many :themes, Theme, join_through: ThemeLocation
     end
 
     def preload(query) do
       from q in query,
         preload: [
-          :location_type,
           themes: ^Repo.preload_schema(Theme)
         ]
     end
@@ -26,9 +24,9 @@ defmodule KidseeApi.Schemas.Location do
     @doc false
     def changeset(%Location{} = post, attrs) do
       post
-      |> cast(attrs, [:rating, :website_link, :name, :description, :address, :lat, :lon, :location_type_id])
+      |> cast(attrs, [:rating, :website_link, :name, :description, :address, :lat, :lon])
       |> cast_assoc(:themes, load_themes(attrs))
-      |> validate_required([:name, :address, :location_type_id])
+      |> validate_required([:name, :address])
       |> unique_constraint(:name)
     end
 
@@ -60,7 +58,6 @@ defmodule KidseeApi.Schemas.Location do
             rating :float, "the average rating of the location"
             website_link :string, "a link to the website of the location"
           end
-          relationship :location_type
           relationship :themes
         end
       }

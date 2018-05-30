@@ -8,7 +8,7 @@ defmodule KidseeApiWeb.LocationController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  @whitelist ~w(name rating description address lat lon location_type_id)
+  @whitelist ~w(name rating description address lat lon)
   def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
 
   def index(conn, params) do
@@ -59,7 +59,7 @@ defmodule KidseeApiWeb.LocationController do
     end
   end
 
-  def location_includes, do: "location_type,themes"
+  def location_includes, do: "themes"
 
   def swagger_definitions do
     Map.merge(
