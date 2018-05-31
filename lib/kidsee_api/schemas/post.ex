@@ -1,6 +1,6 @@
 defmodule KidseeApi.Schemas.Post do
   use KidseeApi.Schema
-  alias KidseeApi.Schemas.{ThemeLocation, Comment, Post, Status, ContentType, User, Location}
+  alias KidseeApi.Schemas.{ThemeLocation, Comment, Post, PostType, Status, ContentType, User, Location}
 
   schema "post" do
     field :content, :string
@@ -9,6 +9,7 @@ defmodule KidseeApi.Schemas.Post do
     field :rating_count, :integer
 
     belongs_to :status, Status
+    belongs_to :post_type, PostType
     belongs_to :content_type, ContentType
     belongs_to :user, User
     belongs_to :location, Location
