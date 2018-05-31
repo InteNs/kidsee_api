@@ -31,7 +31,10 @@ defmodule KidseeApi.Context do
       where: q.object_type == ^rating.object_type,
       where: q.object_id == ^rating.object_id
     )
-    KidseeApi.Context.update(object, %{rating: get_average(ratings)})
+    KidseeApi.Context.update(object, %{
+      rating: get_average(ratings),
+      rating_count: length(ratings)
+    })
   end
 
   def get_average(ratings) do

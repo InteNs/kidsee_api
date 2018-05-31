@@ -6,6 +6,7 @@ defmodule KidseeApi.Schemas.Post do
     field :content, :string
     field :title, :string
     field :rating, :float
+    field :rating_count, :integer
 
     belongs_to :status, Status
     belongs_to :content_type, ContentType
@@ -36,7 +37,7 @@ defmodule KidseeApi.Schemas.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:rating, :content, :title, :content_type_id, :user_id, :status_id, :location_id])
+    |> cast(attrs, [:rating, :rating_count, :content, :title, :content_type_id, :user_id, :status_id, :location_id])
     |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :location_id])
   end
 
@@ -48,6 +49,8 @@ defmodule KidseeApi.Schemas.Post do
         attributes do
           title :string, "Title of the post", required: true
           content :string, "the content of the post", required: true
+          rating :float, "average rating of the post"
+          rating_count :integer, "total ratings of the post"
         end
         relationship :user
         relationship :content_type
