@@ -2,7 +2,7 @@ defmodule KidseeApi.PostFactory do
     use ExMachina.Ecto, repo: KidseeApi.Repo
 
     alias KidseeApi.Schemas.Post
-    alias KidseeApi.{StatusFactory, ContentTypeFactory, UserFactory, LocationFactory}
+    alias KidseeApi.{StatusFactory, ContentTypeFactory, PostTypeFactory, UserFactory, LocationFactory}
 
     use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.PostView
 
@@ -13,6 +13,7 @@ defmodule KidseeApi.PostFactory do
         title:        "Example title",
         status:       StatusFactory.insert(:status),
         content_type: ContentTypeFactory.insert(:content_type),
+        post_type:    PostTypeFactory.insert(:post_type),
         user:         UserFactory.insert(:user),
         comments:     []
       }

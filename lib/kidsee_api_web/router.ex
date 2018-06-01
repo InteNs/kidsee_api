@@ -42,6 +42,7 @@ defmodule KidseeApiWeb.Router do
       resources "/locations", LocationController, only: [:index]
     end
     resources "/posts", PostController, only: [:index, :create, :update, :show, :delete]
+    resources "/post-types", PostTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/comments", CommentController, only: [:index, :create, :update, :show, :delete]
     resources "/users", UserController, only: [:index, :update, :show, :delete]
     patch "/password-update/:id", PasswordController, :update
