@@ -46,7 +46,9 @@ defmodule KidseeApiWeb.PostTypeController do
   end
 
   def swagger_definitions do
-    Map.merge(PostType.swagger_definitions, SwaggerCommon.definitions)
+    Map.merge(
+      PostType.swagger_definitions,
+      SwaggerCommon.definitions)
   end
 
   swagger_path :index do

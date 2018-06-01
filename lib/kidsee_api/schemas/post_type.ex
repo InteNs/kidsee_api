@@ -20,10 +20,10 @@ defmodule KidseeApi.Schemas.PostType do
   def swagger_definitions do
     use PhoenixSwagger
     %{
-      status: JsonApi.resource do
-        description "A post_type"
+      post_type: JsonApi.resource do
+        description "A post type"
         attributes do
-          name :string, "the post_type name", required: true
+          name :string, "the post type name", required: true
         end
       end
     }
