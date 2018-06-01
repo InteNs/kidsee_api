@@ -28,6 +28,7 @@ defmodule KidseeApiWeb.Router do
     resources "/assignments", AssignmentController, only: [:index, :create, :update, :show, :delete]
     resources "/answers", AnswerController, only: [:index, :create, :update, :show, :delete]
     resources "/user-answers", UserAnswerController, only: [:index, :create, :update, :show, :delete]
+    resources "/user-assignments", UserAssignmentController, only: [:index, :create, :update, :show, :delete]
     resources "/assignment-types", AssignmentTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/answer-types", AnswerTypeController, only: [:index, :create, :update, :show, :delete]
     resources "/locations", LocationController, only: [:index, :create, :update, :show, :delete]
