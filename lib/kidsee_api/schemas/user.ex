@@ -1,7 +1,7 @@
 defmodule KidseeApi.Schemas.User do
   use KidseeApi.Schema
   use Arc.Ecto.Schema
-  alias KidseeApi.Schemas.User
+  alias KidseeApi.Schemas.{User, Role}
 
   schema "user" do
     field :avatar, KidseeApiWeb.Avatar.Type
@@ -11,6 +11,8 @@ defmodule KidseeApi.Schemas.User do
     field :password, :string
     field :school, :string
     field :username, :string
+
+    belongs_to :role, Role
 
     timestamps()
   end
@@ -43,6 +45,7 @@ defmodule KidseeApi.Schemas.User do
           postal_code :string, "The postal code of the user's address"
           school :string, "Name of the school the user goes to"
         end
+        relationship :role
       end
     }
   end
