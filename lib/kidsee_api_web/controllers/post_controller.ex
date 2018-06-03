@@ -8,7 +8,7 @@ defmodule KidseeApiWeb.PostController do
 
   action_fallback KidseeApiWeb.FallbackController
 
-  @whitelist ~w(content title status_id content_type_id user_id location_id)
+  @whitelist ~w(content title status_id content_type_id user_id location_id post_type_id)
   def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
 
   def index(conn, params) do
