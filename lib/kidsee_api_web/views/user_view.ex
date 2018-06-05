@@ -7,7 +7,8 @@ defmodule KidseeApiWeb.UserView do
     :birthdate,
     :school,
     :postal_code,
-    :avatar
+    :avatar,
+    :inserted_at
   ]
 
   def avatar(user, _conn) do
