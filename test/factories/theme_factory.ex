@@ -7,7 +7,7 @@ defmodule KidseeApi.ThemeFactory do
 
     def theme_factory do
       %Theme{
-        name:         "Example name",
+        name:         sequence(:name, &"theme name #{&1}"),
         locations:    []
       }
     end
