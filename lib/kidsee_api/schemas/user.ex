@@ -22,7 +22,11 @@ defmodule KidseeApi.Schemas.User do
   end
 
   @doc false
-  def changeset(%User{} = user, attrs) do
+  def changeset(%User{id: id} = user, attrs) do
+    if Map.get(attrs, "avatar", nil) != nil do
+      attrs = Map.update(attrs, "avatar", "", &(%{filename: "#{id}_avatar.png", binary: KidseeApiWeb.Avatar.decode!(&1)}))
+    end
+
     user
     |> cast(attrs, [:username, :password, :email, :birthdate, :school, :postal_code])
     |> cast_attachments(attrs, [:avatar])

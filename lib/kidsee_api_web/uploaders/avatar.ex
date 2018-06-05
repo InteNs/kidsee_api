@@ -14,6 +14,11 @@ defmodule KidseeApiWeb.Avatar do
     ~w(.jpg .jpeg .png) |> Enum.member?(Path.extname(file.file_name))
   end
 
+  def decode!(nil), do: nil
+  def decode!(string) do
+    Base.decode64!(string)
+  end
+
   # Define a thumbnail transformation:
   # def transform(:thumb, _) do
   #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
