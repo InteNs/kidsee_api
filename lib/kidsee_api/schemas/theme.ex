@@ -19,7 +19,10 @@ defmodule KidseeApi.Schemas.Theme do
   end
 
   @doc false
-  def changeset(%Theme{} = post, attrs) do
+  def changeset(%Theme{id: id} = post, attrs) do
+    if Map.get(attrs, "icon", nil) != nil do
+      attrs = Map.update(attrs, "icon", "", &(%{filename: "#{id}_icon.png", binary: KidseeApiWeb.Avatar.decode!(&1)}))
+    end
     post
     |> cast(attrs, [:name])
     |> cast_attachments(attrs, [:icon])

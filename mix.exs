@@ -39,7 +39,7 @@ defmodule KidseeApi.Mixfile do
       {:faker, "~> 0.9",      only: [:dev, :test]},
       {:cors_plug, "~> 1.5"},
       {:arc, "~> 0.8.0"},
-      {:arc_ecto, "~> 0.7.0"},
+      {:arc_ecto, git: "https://github.com/azhi/arc_ecto", branch: "allow-binary-data-attachments"},
       {:phoenix, "~> 1.3.2"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.3"},
