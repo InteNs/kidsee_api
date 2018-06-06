@@ -19,12 +19,14 @@ defmodule KidseeApi.Schemas.Discovery do
   end
 
   def swagger_definitions do
-    %{}
-    # use PhoenixSwagger
-    # %{
-    #   discovery: JsonApi.resource do
-    #     name "the name of the discovery"
-    #   end
-    # }
+    use PhoenixSwagger
+    %{
+      discovery: JsonApi.resource do
+        description "a discovery"
+        attributes do
+          name :string, "the name of the discovery"
+        end
+      end
+    }
   end
 end
