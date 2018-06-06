@@ -29,7 +29,7 @@ defmodule KidseeApi.Schemas.Post do
   def preload(query) do
     from q in query,
       preload: [
-        :status, :content_type, :user,
+        :status, :content_type, :post_type, :user,
         location: ^Repo.preload_schema(Location),
         comments: ^Repo.preload_schema(Comment, :nested)
       ]
@@ -38,8 +38,8 @@ defmodule KidseeApi.Schemas.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:rating, :rating_count, :content, :title, :content_type_id, :user_id, :status_id, :location_id])
-    |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :location_id])
+    |> cast(attrs, [:rating, :rating_count, :content, :title, :content_type_id, :post_type_id, :user_id, :status_id, :location_id])
+    |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :post_type_id, :location_id])
   end
 
   def swagger_definitions do
@@ -55,6 +55,7 @@ defmodule KidseeApi.Schemas.Post do
         end
         relationship :user
         relationship :content_type
+        relationship :post_type
         relationship :location
         relationship :status
         relationship :comments, type: :has_many
