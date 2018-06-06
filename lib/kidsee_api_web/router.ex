@@ -26,6 +26,7 @@ defmodule KidseeApiWeb.Router do
   scope "/api", KidseeApiWeb do
     pipe_through [:api, :auth]
     resources "/assignments", AssignmentController, only: [:index, :create, :update, :show, :delete]
+    resources "/discoveries", DiscoveryController, only: [:index, :create, :update, :show, :delete]
     resources "/answers", AnswerController, only: [:index, :create, :update, :show, :delete]
     resources "/user-answers", UserAnswerController, only: [:index, :create, :update, :show, :delete]
     resources "/user-assignments", UserAssignmentController, only: [:index, :create, :update, :show, :delete]
