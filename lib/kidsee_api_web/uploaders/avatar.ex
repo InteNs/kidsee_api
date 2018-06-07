@@ -17,7 +17,10 @@ defmodule KidseeApiWeb.Avatar do
 
   def decode!(nil), do: nil
   def decode!(string) do
-    Base.decode64!(string)
+    case Base.decode64(string) do
+      {:ok, img} -> img
+      :error -> nil
+    end
   end
 
   # Define a thumbnail transformation:
@@ -36,9 +39,9 @@ defmodule KidseeApiWeb.Avatar do
   # end
 
   # Provide a default URL if there hasn't been a file uploaded
-  # def default_url(version, scope) do
-  #   "/images/avatars/default_#{version}.png"
-  # end
+  def default_url(_version, _scope) do
+    "/uploads/profile.png"
+  end
 
   # Specify custom headers for s3 objects
   # Available options are [:cache_control, :content_disposition,

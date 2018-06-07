@@ -20,14 +20,22 @@ defmodule KidseeApi.Schemas.Theme do
 
   @doc false
   def changeset(%Theme{id: id} = post, attrs) do
-    if Map.get(attrs, "icon", nil) != nil do
-      attrs = Map.update(attrs, "icon", "", &(%{filename: "#{id}_icon.png", binary: KidseeApiWeb.Avatar.decode!(&1)}))
-    end
     post
     |> cast(attrs, [:name])
-    |> cast_attachments(attrs, [:icon])
+    |> cast_icon(id, attrs)
     |> load_locations(Map.get(attrs, "location_ids"))
     |> validate_required([:name])
+  end
+
+  def cast_icon(changeset, theme_id, %{"icon" => icon} = attrs) do
+    if Map.has_key?(attrs, "icon") do
+      icon = %{file_name: "#{theme_id}_icon.png", binary: KidseeApiWeb.Avatar.decode!(icon)}
+      if %{binary: nil} do
+        changeset
+      else
+        cast_attachments(changeset, [icon], [icon])
+      end
+    end
   end
 
   def load_locations(changeset, nil), do: changeset
