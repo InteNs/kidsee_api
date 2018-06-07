@@ -13,7 +13,8 @@ defmodule KidseeApi.Schemas.Comment do
   def preload(query) do
     from q in query,
       preload: [
-        :user, :content_type,
+        :content_type,
+        user: ^Repo.preload_schema(User),
         post: ^Repo.preload_schema(Post),
       ]
   end

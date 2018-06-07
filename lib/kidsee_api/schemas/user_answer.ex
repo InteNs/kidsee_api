@@ -15,7 +15,7 @@ defmodule KidseeApi.Schemas.UserAnswer do
     def preload(query) do
       from q in query,
         preload: [
-          :user,
+          user: ^Repo.preload_schema(User),
           answer: ^Repo.preload_schema(Answer, :nested),
           assignment: ^Repo.preload_schema(Assignment),
         ]

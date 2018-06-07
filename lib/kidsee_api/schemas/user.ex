@@ -18,7 +18,10 @@ defmodule KidseeApi.Schemas.User do
   end
 
   def preload(query) do
-    query
+    from q in query,
+      preload: [
+        :role
+      ]
   end
 
   @doc false
