@@ -13,7 +13,7 @@ defmodule KidseeApi.Schemas.Location do
       field :rating_count, :integer
       field :website_link, :string
       belongs_to :location_type, LocationType
-      many_to_many :themes, Theme, join_through: ThemeLocation
+      many_to_many :themes, Theme, join_through: ThemeLocation, on_replace: :delete
     end
 
     def preload(query) do
@@ -26,17 +26,24 @@ defmodule KidseeApi.Schemas.Location do
 
     @doc false
     def changeset(%Location{} = post, attrs) do
+      IO.inspect(attrs)
       post
       |> cast(attrs, [:rating, :rating_count, :website_link, :name, :description, :address, :lat, :lon, :location_type_id])
-      |> cast_assoc(:themes, load_themes(attrs))
+      |> embed_themes(load_themes(attrs))
       |> validate_required([:name, :address, :location_type_id])
       |> unique_constraint(:name)
     end
 
+    def embed_themes(changeset, nil), do: changeset
+    def embed_themes(changeset, themes) do
+      put_assoc(changeset, :themes, themes)
+    end
+
     def load_themes(attrs) do
-      case attrs["themes_ids"] || [] do
-        [] -> []
-        ids -> Repo.all from r in Theme, where: r.id in ^ids
+      if Map.has_key?(attrs, "themes_ids") do
+        Repo.all from r in Theme, where: r.id in ^Map.fetch!(attrs, "themes_ids")
+      else
+        nil
       end
     end
 
