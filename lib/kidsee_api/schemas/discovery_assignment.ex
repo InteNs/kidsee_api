@@ -15,7 +15,7 @@ defmodule KidseeApi.Schemas.DiscoveryAssignment do
   def preload(query) do
     from q in query,
       preload: [
-        :discovery,
+        discovery: ^Repo.preload_schema(Discovery),
         assignment: ^Repo.preload_schema(Assignment)
       ]
   end

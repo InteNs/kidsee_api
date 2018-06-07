@@ -7,7 +7,8 @@ defmodule KidseeApi.DiscoveryFactory do
 
   def discovery_factory do
     %Discovery{
-      name: Faker.Name.name()
+      name: Faker.Name.name(),
+      assignments: []
     }
   end
 
