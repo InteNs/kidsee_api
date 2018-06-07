@@ -26,16 +26,23 @@ defmodule KidseeApi.Schemas.User do
 
   @doc false
   def changeset(%User{id: id} = user, attrs) do
-    if Map.get(attrs, "avatar", nil) != nil do
-      attrs = Map.update(attrs, "avatar", "", &(%{filename: "#{id}_avatar.png", binary: KidseeApiWeb.Avatar.decode!(&1)}))
-    end
-
     user
     |> cast(attrs, [:username, :password, :email, :birthdate, :school, :postal_code])
-    |> cast_attachments(attrs, [:avatar])
+    |> cast_avatar(id, attrs)
     |> validate_required([:username, :password, :email, :birthdate])
     |> unique_constraint(:email)
     |> unique_constraint(:username)
+  end
+
+  def cast_avatar(changeset, user_id, %{"avatar" => avatar} = attrs) do
+    if Map.has_key?(attrs, "avatar") do
+      avatar = %{file_name: "#{user_id}_avatar.png", binary: KidseeApiWeb.Avatar.decode!(avatar)}
+      if %{binary: nil} do
+        changeset
+      else
+        cast_attachments(changeset, [avatar], [:avatar])
+      end
+    end
   end
 
   def swagger_definitions do
