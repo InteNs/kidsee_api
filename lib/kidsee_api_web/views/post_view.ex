@@ -11,7 +11,6 @@ defmodule KidseeApiWeb.PostView do
   attributes [
     :title,
     :content,
-    :rating,
     :rating_count
   ]
 end
