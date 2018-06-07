@@ -16,7 +16,7 @@ defmodule KidseeApi.Schemas.Rating do
   def preload(query) do
     from q in query,
       preload: [
-        :user
+        user: ^Repo.preload_schema(User)
       ]
   end
   @doc false

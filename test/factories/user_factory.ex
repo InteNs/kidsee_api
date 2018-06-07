@@ -2,17 +2,19 @@ defmodule KidseeApi.UserFactory do
   use ExMachina.Ecto, repo: KidseeApi.Repo
 
   alias KidseeApi.Schemas.User
+  alias KidseeApi.RoleFactory
 
   use KidseeApi.JsonApiParamsStrategy, view: KidseeApiWeb.UserView
 
   def user_factory do
     %User{
-      email:     sequence(:email, &"email-#{&1}@example.com"),
-      username:  sequence(:username, &"test_user_#{&1}"),
-      password:  Comeonin.Bcrypt.hashpwsalt("test123"),
-      birthdate: Faker.DateTime.backward(2000),
+      email:       sequence(:email, &"email-#{&1}@example.com"),
+      username:    sequence(:username, &"test_user_#{&1}"),
+      password:    Comeonin.Bcrypt.hashpwsalt("test123"),
+      birthdate:   Faker.DateTime.backward(2000),
       postal_code: Faker.Address.postcode(),
-      school:    "Avans"
+      school:      "Avans",
+      role:        RoleFactory.insert(:role)
     }
   end
 

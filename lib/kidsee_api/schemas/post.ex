@@ -29,7 +29,8 @@ defmodule KidseeApi.Schemas.Post do
   def preload(query) do
     from q in query,
       preload: [
-        :status, :content_type, :post_type, :user,
+        :status, :content_type, :post_type,
+        user: ^Repo.preload_schema(User),
         location: ^Repo.preload_schema(Location),
         comments: ^Repo.preload_schema(Comment, :nested)
       ]

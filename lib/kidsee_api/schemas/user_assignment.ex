@@ -12,7 +12,7 @@ defmodule KidseeApi.Schemas.UserAssignment do
     def preload(query) do
       from q in query,
         preload: [
-          :user,
+          user: ^Repo.preload_schema(User),
           assignment: ^Repo.preload_schema(Assignment),
         ]
     end

@@ -1,6 +1,8 @@
 defmodule KidseeApiWeb.UserView do
   use KidseeApiWeb, :view
 
+  has_one :role, serializer: KidseeApiWeb.RoleView
+
   attributes [
     :username,
     :email,

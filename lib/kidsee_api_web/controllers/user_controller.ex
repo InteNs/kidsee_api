@@ -13,41 +13,52 @@ defmodule KidseeApiWeb.UserController do
 
   def index(conn, params) do
     users = User
-            |> build_query(conn, params)
-            |> Repo.paginate(params)
-    render(conn, "index.json-api", data: users.entries)
+                |> Repo.preload_schema
+                |> build_query(conn, params)
+                |> Repo.paginate(params)
+    render(conn, "index.json-api", data: users.entries, opts: [include: user_includes()])
   end
 
-  def create(conn, %{"data" => data}) do
-    attrs = Params.to_attributes(data)
-    with {:ok, %User{} = user} <- Context.create(User, attrs) do
+  def create(conn, %{"data" => user_params}) do
+    user_params = Params.to_attributes(user_params)
+    with {:ok, %User{id: id}} <- Context.create(User, user_params) do
+      user = User
+             |> Repo.preload_schema
+             |> Repo.get!(id)
       conn
       |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json-api", data: user)
+      |> put_resp_header("user", location_path(conn, :show, user))
+      |> render("show.json-api", data: user, opts: [include: user_includes()])
     end
   end
 
   def show(conn, %{"id" => id}) do
-    user = Context.get!(User, id)
-    render conn, "show.json-api", data: user
+    user = User
+           |> Repo.preload_schema
+           |> Repo.get!(id)
+    render(conn, "show.json-api", data: user, opts: [include: user_includes()])
   end
 
-  def update(conn, %{"id" => id, "data" => data}) do
-    attrs = Params.to_attributes(data)
-    user = Context.get!(User, id)
+  def update(conn, %{"id" => id, "data" => user_params}) do
+    user_params = Params.to_attributes(user_params)
+    user = User
+           |> Repo.preload_schema
+           |> Repo.get!(id)
 
-    with {:ok, %User{} = user} <- Context.update(user, attrs) do
-      render conn, "show.json-api", data: user
+    with {:ok, %User{} = user} <- Context.update(user, user_params) do
+      render(conn, "show.json-api", data: user)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Context.get!(User, id)
+    user = User
+           |> Repo.get!(id)
     with {:ok, %User{}} <- Context.delete(user) do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def user_includes, do: "role"
 
   def swagger_definitions do
     Map.merge(User.swagger_definitions, SwaggerCommon.definitions)
