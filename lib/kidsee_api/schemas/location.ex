@@ -10,6 +10,7 @@ defmodule KidseeApi.Schemas.Location do
       field :lat, :float
       field :lon, :float
       field :rating, :float
+      field :rating_count, :integer
       field :website_link, :string
       belongs_to :location_type, LocationType
       many_to_many :themes, Theme, join_through: ThemeLocation
@@ -26,7 +27,7 @@ defmodule KidseeApi.Schemas.Location do
     @doc false
     def changeset(%Location{} = post, attrs) do
       post
-      |> cast(attrs, [:rating, :website_link, :name, :description, :address, :lat, :lon, :location_type_id])
+      |> cast(attrs, [:rating, :rating_count, :website_link, :name, :description, :address, :lat, :lon, :location_type_id])
       |> cast_assoc(:themes, load_themes(attrs))
       |> validate_required([:name, :address, :location_type_id])
       |> unique_constraint(:name)
