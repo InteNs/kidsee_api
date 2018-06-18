@@ -9,6 +9,7 @@ defmodule KidseeApiWeb.AssignmentView do
     :name,
     :content,
     :description,
-    :rating
+    :rating,
+    :completed
   ]
 end
