@@ -2,13 +2,13 @@ defmodule KidseeApiWeb.AssignmentController do
   use KidseeApiWeb, :controller
 
   alias KidseeApi.Context
-  alias KidseeApi.Schemas.Assignment
+  alias KidseeApi.Schemas.{Assignment, UserAssignment}
   alias JaSerializer.Params
   alias KidseeApi.Repo
 
   action_fallback KidseeApiWeb.FallbackController
 
-  @whitelist ~w(name rating description address lat lon assignment_type_id)
+  @whitelist ~w(name rating description address lat lon assignment_type_id completed)
   def build_filter_query(query, attr, value, _conn) when attr in @whitelist, do: filter(query, attr, value)
 
   def index(conn, params) do
@@ -16,6 +16,7 @@ defmodule KidseeApiWeb.AssignmentController do
                 |> Repo.preload_schema
                 |> build_query(conn, params)
                 |> Repo.paginate(params)
+                |> assignments_completed(conn)
     render(conn, "index.json-api", data: assignments.entries, opts: [include: assignment_includes()])
   end
 
@@ -36,6 +37,7 @@ defmodule KidseeApiWeb.AssignmentController do
     assignment = Assignment
            |> Repo.preload_schema
            |> Repo.get!(id)
+           |> assignment_completed(conn)
     render(conn, "show.json-api", data: assignment, opts: [include: assignment_includes()])
   end
 
@@ -56,6 +58,26 @@ defmodule KidseeApiWeb.AssignmentController do
     with {:ok, %Assignment{}} <- Context.delete(assignment) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def assignment_completed(assignment, conn) do
+    {user_id, _} = Integer.parse(conn.private.guardian_default_claims["sub"])
+    completed_assignment = Repo.all(from u in UserAssignment,
+      where: u.assignment_id == ^assignment.id,
+      where: u.user_id == ^user_id
+    )
+    if length(completed_assignment) > 0 do
+      assignment = %{assignment | :completed => true}
+    end
+    assignment
+  end
+
+  def assignments_completed(assignments_list, conn) do
+    temp_list = []
+    new_assignments_list =  Enum.map(assignments_list, fn(assignment) ->
+      temp_list = temp_list ++ assignment_completed(assignment, conn)
+    end)
+     %{assignments_list | :entries => new_assignments_list}
   end
 
   def assignment_includes, do: "assignment_type,location,answer_type"

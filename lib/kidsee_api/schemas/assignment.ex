@@ -8,6 +8,7 @@ defmodule KidseeApi.Schemas.Assignment do
       field :description, :string
       field :content, :string
       field :rating, :float
+      field :completed, :boolean, virtual: true, default: false
 
       belongs_to :answer_type, AnswerType
       belongs_to :location, Location
