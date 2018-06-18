@@ -29,11 +29,11 @@ defmodule KidseeApi.Schemas.Theme do
 
   def cast_icon(changeset, theme_id, %{"icon" => icon} = attrs) do
     if Map.has_key?(attrs, "icon") do
-      icon = %{file_name: "#{theme_id}_icon.png", binary: KidseeApiWeb.Avatar.decode!(icon)}
-      if %{binary: nil} do
+      icon = %{filename: "#{theme_id}_icon.png", binary: KidseeApiWeb.Avatar.decode!(icon)}
+      if Map.get(icon, :binary) == nil do
         changeset
       else
-        cast_attachments(changeset, [icon], [icon])
+        cast_attachments(changeset, %{icon: icon} , [:icon])
       end
     end
   end

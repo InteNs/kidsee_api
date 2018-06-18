@@ -36,11 +36,11 @@ defmodule KidseeApi.Schemas.User do
 
   def cast_avatar(changeset, user_id, %{"avatar" => avatar} = attrs) do
     if Map.has_key?(attrs, "avatar") do
-      avatar = %{file_name: "#{user_id}_avatar.png", binary: KidseeApiWeb.Avatar.decode!(avatar)}
-      if %{binary: nil} do
+      avatar = %{filename: "#{user_id}_avatar.png", binary: KidseeApiWeb.Avatar.decode!(avatar)}
+      if Map.get(avatar, :binary) == nil do
         changeset
       else
-        cast_attachments(changeset, [avatar], [:avatar])
+        cast_attachments(changeset, %{avatar: avatar}, [:avatar])
       end
     end
   end
