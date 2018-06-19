@@ -26,7 +26,6 @@ defmodule KidseeApi.Schemas.Location do
 
     @doc false
     def changeset(%Location{} = post, attrs) do
-      IO.inspect(attrs)
       post
       |> cast(attrs, [:rating, :rating_count, :website_link, :name, :description, :address, :lat, :lon, :location_type_id])
       |> embed_themes(load_themes(attrs))

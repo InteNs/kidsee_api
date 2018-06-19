@@ -39,8 +39,26 @@ defmodule KidseeApi.Schemas.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:rating, :rating_count, :content, :title, :content_type_id, :post_type_id, :user_id, :status_id, :location_id])
+    |> cast(attrs, [:rating, :rating_count, :title, :content_type_id, :post_type_id, :user_id, :status_id, :location_id])
+    |> cast_content(post, attrs)
     |> validate_required([:content, :title, :content_type_id, :user_id, :status_id, :post_type_id, :location_id])
+  end
+
+  def cast_content(changeset, %{content_type: content_type, id: id} = post, %{"content" => content} = attrs) do
+    type = case content_type do
+      %Ecto.Association.NotLoaded{} ->
+        attrs
+        |> Map.get("content_type_id")
+        |> ContentType.name_for_id()
+      _ -> Map.get(content_type, :name)
+    end
+    case type do
+      "image" ->
+        content = %{filename: "#{id}_content.png", binary: KidseeApiWeb.Avatar.decode!(content)}
+        {:ok, url} = KidseeApiWeb.Avatar.store({content, post})
+        cast(changeset, %{content: url}, [:content])
+      _ -> cast(changeset, %{content: content}, [:content])
+    end
   end
 
   def swagger_definitions do
