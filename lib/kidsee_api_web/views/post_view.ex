@@ -13,4 +13,11 @@ defmodule KidseeApiWeb.PostView do
     :content,
     :rating_count
   ]
+
+  def content(%{content: content, content_type: type} = post, _conn) do
+    case Map.get(type, :name) do
+      "image" -> KidseeApiWeb.Avatar.url({content, post})
+      _ -> content
+    end
+  end
 end

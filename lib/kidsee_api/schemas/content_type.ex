@@ -30,4 +30,10 @@ defmodule KidseeApi.Schemas.ContentType do
       end
     }
   end
+
+  def name_for_id(id) do
+    from q in ContentType,
+      where: q.id == ^id,
+      select: q.name
+  end
 end
