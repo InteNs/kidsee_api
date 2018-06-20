@@ -58,7 +58,7 @@ defmodule KidseeApiWeb.DiscoveryController do
     end
   end
 
-  def discovery_includes, do: ""
+  def discovery_includes, do: "assignments"
 
   def swagger_definitions do
     Map.merge(
