@@ -8,7 +8,7 @@ defmodule KidseeApi.AssignmentFactory do
 
     def assignment_factory do
       %Assignment{
-        name:            "Example name",
+        name:            sequence("Example name"),
         content:         "Example content",
         description:     "Example description",
         location:        LocationFactory.insert(:location),
