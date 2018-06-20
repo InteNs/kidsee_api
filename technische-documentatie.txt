@@ -1,0 +1,18 @@
+Het Phoenix framework is een normaal MVC framework met een ORM (ecto)
+Hierdoor is de structuur en architectuur niet heel verschillend dan van frameworks zoals
+Laravel of Ruby On Rails.
+
+De models (Schema's in phoenix) zijn te vinden in:
+lib/kidsee_api/schemas
+
+De controllers zijn te vinden in:
+lib/kidsee_api_web/controllers
+
+De views zijn te vinden in (definieren enkel de json output):
+lib/kidsee_api_web/views
+
+De migrations zijn te vinden in:
+priv/repo/migrations
+
+De tests zijn te vinden in:
+test/

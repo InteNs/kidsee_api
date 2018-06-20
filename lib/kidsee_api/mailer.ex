@@ -6,7 +6,7 @@ defmodule KidseeApi.Email do
         |> to(email_address)
         |> from("cedricremond@live.nl")
         |> subject("Wachtwoord reset")
-        |> html_body("<h3>Het wacthoord van dit Kidsee accounts is gereset.</h3><br>
+        |> html_body("<h3>Het wachtwoord van je Kidsee accounts is gereset.</h3><br>
                      Je nieuwe wachtwoord is: #{new_password}<br>
                      Je kan je wachtwoord opnieuw instellen na het inloggen.")
       end
