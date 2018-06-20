@@ -32,7 +32,7 @@ defmodule KidseeApi.Schemas.ContentType do
   end
 
   def name_for_id(id) do
-    from q in ContentType,
+    Repo.one! from q in ContentType,
       where: q.id == ^id,
       select: q.name
   end
