@@ -29,7 +29,6 @@ defmodule KidseeApi.Schemas.Answer do
       answer
       |> cast(attrs, [:answer, :correct_answer, :assignment_id])
       |> validate_required([:answer, :correct_answer, :assignment_id])
-      |> unique_constraint(:id)
     end
 
     def swagger_definitions do
